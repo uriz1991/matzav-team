@@ -65,6 +65,15 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .share-img-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .share-txt-btn{padding:11px 18px;border-radius:12px;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,0.2);cursor:pointer;font-family:inherit;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
 .share-txt-btn:hover{background:rgba(255,255,255,0.14)}
+
+/* ADVANCED SECTION */
+.adv-toggle{width:100%;padding:11px;border-radius:12px;font-size:13px;font-weight:600;border:1px dashed rgba(99,110,150,0.25);background:rgba(99,110,150,0.05);color:var(--t3);cursor:pointer;font-family:inherit;margin-bottom:14px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.adv-toggle:hover{background:rgba(99,110,150,0.1);color:var(--t2)}
+.adv-toggle.open{color:var(--t2);border-style:solid}
+.adv-section{display:none;animation:fadeIn .3s ease}
+.adv-section.open{display:block}
+.adv-badge{font-size:10px;background:rgba(108,92,231,0.2);color:#b197fc;padding:2px 8px;border-radius:10px;font-weight:700;margin-right:4px}
+.protect-note{font-size:10px;color:var(--grn);margin-top:4px}
 .share-status{font-size:11px;color:rgba(255,255,255,0.55);margin-top:8px;height:16px}
 .again-btn{width:100%;padding:12px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid var(--brd);background:rgba(99,110,150,0.08);color:var(--t2);cursor:pointer;font-family:inherit;margin-bottom:14px;transition:all .2s}
 .again-btn:hover{background:rgba(99,110,150,0.15);color:var(--t1)}
@@ -160,6 +169,57 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
     </div>
   </div>
 
+  <!-- ADVANCED TOGGLE -->
+  <button class="adv-toggle" id="advToggleBtn" onclick="toggleAdv()">
+    <span>⚙️ פרמטרים מתקדמים</span>
+    <span class="adv-badge">+3</span>
+    <span id="advArrow">▼</span>
+  </button>
+
+  <div class="adv-section" id="advSection">
+    <!-- עומס תעסוקתי -->
+    <div class="card">
+      <div class="card-title">💼 עומס תעסוקתי</div>
+      <div class="fg">
+        <label class="fl">מה המצב בעבודה?</label>
+        <select class="sel" id="workSel">
+          <option value="none">😌 עובד כרגיל</option>
+          <option value="medium">😤 עומס בינוני — שעות נוספות</option>
+          <option value="high">🔥 עומס גבוה — לחץ ותפקוד בכוח</option>
+          <option value="uncertain">😨 חוסר ודאות תעסוקתית — פגיעה בפרנסה</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- שיבושים בחיים -->
+    <div class="card">
+      <div class="card-title">🌀 שיבושים בשגרת החיים</div>
+      <div class="trow">
+        <label class="trow-l">😴 שינה פחות מ-6 שעות בממוצע<span class="trow-sub">עייפות כרונית מגבירה עומס</span></label>
+        <button class="tog" id="sleepTog" onclick="toggle('sleep')"></button>
+      </div>
+      <div class="trow">
+        <label class="trow-l">❌ ביטולים — חגים, אירועים, חופשות<span class="trow-sub">פגיעה בשגרה ובתחושת נורמליות</span></label>
+        <button class="tog" id="cancelTog" onclick="toggle('cancel')"></button>
+      </div>
+    </div>
+
+    <!-- רשת תמיכה -->
+    <div class="card">
+      <div class="card-title">🤝 רשת תמיכה חברתית</div>
+      <div class="fg">
+        <label class="fl">האם יש לך אנשים קרובים שאפשר לדבר איתם?</label>
+        <select class="sel" id="supportSel">
+          <option value="strong">💪 תמיכה טובה — משפחה וחברים זמינים</option>
+          <option value="medium" selected>🙂 תמיכה חלקית</option>
+          <option value="weak">😔 תמיכה מועטה</option>
+          <option value="none">🚫 מרגיש/ה לבד לגמרי</option>
+        </select>
+        <div class="protect-note">✨ תמיכה חברתית היא גורם מגן — מפחיתה עומס</div>
+      </div>
+    </div>
+  </div>
+
   <button class="calc-btn" onclick="calculate()">🔥 חשב את הציון שלי</button>
 </div>
 
@@ -184,7 +244,7 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 <footer class="footer">
   <div class="footer-tools">
     <div class="footer-ver">
-      <span class="footer-ver-text">v2.1.0</span>
+      <span class="footer-ver-text">v2.2.0</span>
       <button class="b bg bs" onclick="checkVersion()">🔍 בדוק עדכונים</button>
       <span id="ver-status" class="footer-ver-status"></span>
     </div>
@@ -200,14 +260,22 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 </div>
 
 <script>
-const VERSION="2.1.0";
+const VERSION="2.2.0";
 const API="https://api.tzevaadom.co.il/alerts-history";
 const R={"עוטף עזה":["שדרות","נתיבות","אופקים","ניר עוז","כרם שלום","בארי","רעים","סעד","כיסופים","יד מרדכי"],"דרום":["אשקלון","אשדוד","באר שבע","קריית גת","ערד","דימונה","ירוחם","מצפה רמון","אילת"],"שפלה":["קריית מלאכי","גדרה","רחובות","נס ציונה","ראשון לציון","בית שמש","יבנה"],"מרכז":["תל אביב","רמת גן","בני ברק","חולון","בת ים","פתח תקווה","רמלה","לוד","מודיעין"],"השרון":["נתניה","הרצליה","רעננה","כפר סבא","הוד השרון","רמת השרון"],"שומרון":["אריאל","קדומים","קרני שומרון","אלקנה","ברקן","רבבה","יצהר","איתמר","עלי","שילה","בית אל","עפרה"],"צפון":["חיפה","עכו","נהריה","כרמיאל","צפת","טבריה","עפולה","מגדל העמק","קריית שמונה","מטולה","שלומי"],"ירושלים":["ירושלים","מעלה אדומים","גבעת זאב","אפרת","גוש עציון"],"יהודה":["חברון","קריית ארבע","ביתר עילית"]};
 const AF={baby:{l:"תינוק",f:2.0,e:"👶"},toddler:{l:"פעוט",f:1.7,e:"🧒"},child:{l:"ילד",f:1.3,e:"👦"},teen:{l:"נער",f:0.8,e:"🧑"}};
 const CF={none:{l:"מהבית",f:0},short:{l:"עד 30 דק׳",f:0.5},medium:{l:"30–60 דק׳",f:1.0},long:{l:"60–90 דק׳",f:1.5},extreme:{l:"90+ דק׳",f:2.0}};
 const LV=[{m:15,l:"יציב",c:"#51cf66",e:"😊",d:"מתפקד כרגיל — עם כל הכובד של התקופה"},{m:30,l:"לחץ קל",c:"#94d82d",e:"😐",d:"יש לחץ ברקע, אבל מסתדר"},{m:50,l:"לחץ בינוני",c:"#ffd43b",e:"😟",d:"זה מורגש — מגיע לך גמישות ותמיכה"},{m:70,l:"לחץ גבוה",c:"#ffa94d",e:"😰",d:"עומס כבד — חשוב לדבר עם מישהו"},{m:100,l:"מצוקה",c:"#ff6b6b",e:"🆘",d:"מצב קשה מאוד — אל תישאר עם זה לבד"}];
 
-let aR={},kids=[],toggles={partner:false,evac:false,prox:false,traffic:false};
+let aR={},kids=[],toggles={partner:false,evac:false,prox:false,traffic:false,sleep:false,cancel:false};
+let advOpen=false;
+
+function toggleAdv(){
+  advOpen=!advOpen;
+  document.getElementById('advSection').classList.toggle('open',advOpen);
+  document.getElementById('advToggleBtn').classList.toggle('open',advOpen);
+  document.getElementById('advArrow').textContent=advOpen?'▲':'▼';
+}
 let ac=[...new Set(Object.values(R).flat())].sort((a,b)=>a.localeCompare(b,'he'));
 let curResult=null;
 
@@ -235,7 +303,10 @@ function renderKids(){
   });
 }
 
-function calcScore(city,ks,partner,evac,prox,commute,traffic){
+const WF={none:0,medium:6,high:13,uncertain:18};
+const SF={strong:-9,medium:0,weak:10,none:18};
+
+function calcScore(city,ks,partner,evac,prox,commute,traffic,work,sleep,cancel,support){
   const r=rg(city),al=r?(aR[r]||0):0;
   let s=al*2.5;
   if(ks.length>0){const cf=ks.reduce((t,c)=>t+(AF[c.a]?.f||1),0),nf=1+(ks.length-1)*.25;s*=cf*nf*.5}
@@ -244,15 +315,24 @@ function calcScore(city,ks,partner,evac,prox,commute,traffic){
   if(traffic)s+=8;
   if(evac)s+=15;
   if(prox)s+=18;
-  return Math.min(Math.round(s),100);
+  // advanced
+  s+=(WF[work]||0);
+  if(sleep)s+=8;
+  if(cancel)s+=5;
+  s+=(SF[support]||0);
+  return Math.min(Math.round(Math.max(s,0)),100);
 }
 
 function calculate(){
   const city=document.getElementById('cityInp').value.trim();
   const commute=document.getElementById('commuteSel').value;
-  const score=calcScore(city,kids,toggles.partner,toggles.evac,toggles.prox,commute,toggles.traffic);
+  const work=document.getElementById('workSel').value;
+  const support=document.getElementById('supportSel').value;
+  const score=calcScore(city,kids,toggles.partner,toggles.evac,toggles.prox,commute,toggles.traffic,work,toggles.sleep,toggles.cancel,support);
   const lv=gl(score);
   const tags=[];
+  // stash for advanced tag rendering
+  window._advWork=work; window._advSupport=support;
   if(city){const r=rg(city);tags.push(r?`📍 ${r}`:`📍 ${city}`)}
   if(kids.length>0)tags.push(`👶 ${kids.length} ילדים`);
   if(toggles.partner)tags.push('🪖 זוג במיל׳');
@@ -260,6 +340,13 @@ function calculate(){
   if(toggles.prox)tags.push('💔 קרבה לאירוע');
   if(commute!=='none')tags.push(`🚗 ${CF[commute]?.l}`);
   if(toggles.traffic)tags.push('🚧 פקקים');
+  // advanced
+  const work=window._advWork||'none', support=window._advSupport||'medium';
+  if(work&&work!=='none')tags.push({medium:'💼 עומס בינוני',high:'🔥 עומס גבוה',uncertain:'😨 חוסר ודאות'}[work]||'');
+  if(toggles.sleep)tags.push('😴 חסך שינה');
+  if(toggles.cancel)tags.push('❌ שיבושים');
+  if(support==='strong')tags.push('💪 תמיכה טובה');
+  if(support==='weak'||support==='none')tags.push('🚫 מעט תמיכה');
   curResult={score,lv,tags};
   showResult(curResult);
 }
