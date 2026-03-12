@@ -84,11 +84,16 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .fm{background:var(--card);border-radius:12px;padding:16px;border:1px solid rgba(99,110,150,0.07);margin-top:20px}
 .fm h3{font-size:12px;font-weight:700;color:var(--t2);margin-bottom:8px}.fm .txt{font-size:10px;color:var(--t3);line-height:1.8}.fm strong{color:var(--t2)}.fm .hl{color:var(--blu)}
 .ft{text-align:center;padding:16px;margin-top:18px;font-size:9px;color:var(--t3)}
-.footer{text-align:center;padding:4px 16px 16px;margin-top:8px}
+.footer{text-align:center;padding:8px 16px 16px;margin-top:8px}
+.footer-tools{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:8px}
+.footer-ver{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
+.footer-ver-text{font-size:0.65rem;color:var(--t3);opacity:0.7}
+.footer-ver-status{font-size:0.65rem;color:var(--t3)}
+.footer-export{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.footer-import-lbl{cursor:pointer}
 .footer-credit{font-size:0.6rem;color:var(--t3);margin-top:4px;opacity:0.6}
 .footer-credit-link{color:#7eb8f7;text-decoration:none}
 .footer-credit-link:hover{text-decoration:underline}
-.no-ads-badge{font-size:0.6rem;color:var(--t3);margin-top:4px;opacity:0.6}
 @media(max-width:600px){.hdr{padding:12px 14px}.ct{padding:14px 10px}.sts{grid-template-columns:1fr 1fr}.dg{grid-template-columns:1fr 1fr}.ec{flex-wrap:wrap}.eb{display:none}}
 </style>
 </head>
@@ -96,6 +101,7 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 <div class="app" id="app"></div>
 <script>
 const API="https://api.tzevaadom.co.il/alerts-history";
+const VERSION="1.0.0";
 const R={"עוטף עזה":["שדרות","נתיבות","אופקים","ניר עוז","כרם שלום","בארי","רעים","סעד","כיסופים","יד מרדכי"],"דרום":["אשקלון","אשדוד","באר שבע","קריית גת","ערד","דימונה","ירוחם","מצפה רמון","אילת"],"שפלה":["קריית מלאכי","גדרה","רחובות","נס ציונה","ראשון לציון","בית שמש","יבנה"],"מרכז":["תל אביב","רמת גן","בני ברק","חולון","בת ים","פתח תקווה","רמלה","לוד","מודיעין"],"השרון":["נתניה","הרצליה","רעננה","כפר סבא","הוד השרון","רמת השרון"],"שומרון":["אריאל","קדומים","קרני שומרון","אלקנה","ברקן","רבבה","יצהר","איתמר","עלי","שילה","בית אל","עפרה"],"צפון":["חיפה","עכו","נהריה","כרמיאל","צפת","טבריה","עפולה","מגדל העמק","קריית שמונה","מטולה","שלומי"],"ירושלים":["ירושלים","מעלה אדומים","גבעת זאב","אפרת","גוש עציון"],"יהודה":["חברון","קריית ארבע","ביתר עילית"]};
 const AF={baby:{l:"0-2 תינוק",f:2.0,e:"👶"},toddler:{l:"3-5 פעוט",f:1.7,e:"🧒"},child:{l:"6-12 ילד",f:1.3,e:"👦"},teen:{l:"13-17 נער",f:0.8,e:"🧑"}};
 const CF={none:{l:"מהבית",f:0,e:"🏠"},short:{l:"עד 30 דק׳",f:0.5,e:"🚗"},medium:{l:"30-60 דק׳",f:1.0,e:"🚙"},long:{l:"60-90 דק׳",f:1.5,e:"🚐"},extreme:{l:"90+ דק׳",f:2.0,e:"😩"}};
@@ -265,10 +271,29 @@ function rdm(){
   m.appendChild(h('button',{className:'b bg',style:{width:'100%',justifyContent:'center',padding:'10px'},onClick:()=>{S.sel=null;rr()}},'סגור'));
   ov.appendChild(m);return ov;
 }
+
+function cmpV(a,b){const pa=a.split('.').map(Number),pb=b.split('.').map(Number);for(let i=0;i<Math.max(pa.length,pb.length);i++){const d=(pa[i]||0)-(pb[i]||0);if(d!==0)return d}return 0}
+async function checkVersion(){const el=document.getElementById('ver-status');if(!el)return;el.textContent='⏳ בודק...';try{const r=await fetch('./index.html?_='+Date.now(),{cache:'no-store'});const txt=await r.text();const m=txt.match(/const VERSION\s*=\s*["']([^"']+)['"]/);if(!m){el.textContent='❓ לא ניתן לבדוק';return}const lv=m[1];if(cmpV(lv,VERSION)>0){el.innerHTML=`🆕 גרסה ${lv} זמינה — <a href="javascript:location.reload(true)" style="color:var(--blu)">רענן לעדכון</a>`}else{el.textContent=`✅ הגרסה עדכנית`}}catch{el.textContent='❌ שגיאה בבדיקה'}}
+function dl(content,filename,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=filename;a.click();URL.revokeObjectURL(a.href)}
+function exportJSON(){dl(JSON.stringify(S.emps,null,2),`matzav-team-backup-${new Date().toISOString().slice(0,10)}.json`,'application/json')}
+function exportCSV(){const hdr=['שם','עיר','אזור','ציון לחץ','רמת לחץ','מספר ילדים','זוג במילואים','מפונה','קרבה לאירוע','זמן נסיעה','פקקים'];const rows=S.emps.map(e=>{const s=sc(e),lv=gl(s),r=rg(e.city);return[e.name,e.city,r||'',s,lv.l,e.ch?.length||0,e.pr?'כן':'לא',e.ev?'כן':'לא',e.px?'כן':'לא',CF[e.cm]?.l||'',e.cs?'כן':'לא']});const csv='\uFEFF'+[hdr,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');dl(csv,`matzav-team-${new Date().toISOString().slice(0,10)}.csv`,'text/csv;charset=utf-8')}
+function importJSON(file){if(!file)return;const reader=new FileReader();reader.onload=e=>{try{const data=JSON.parse(e.target.result);if(Array.isArray(data)){S.emps=data;sv();rr()}}catch{alert('קובץ לא תקין')}};reader.readAsText(file)}
+
 fa();
 </script>
 <footer class="footer">
-  <p class="no-ads-badge">ללא פרסומות. לתמיד.</p>
+  <div class="footer-tools">
+    <div class="footer-ver">
+      <span class="footer-ver-text">v1.0.0</span>
+      <button class="b bg bs" onclick="checkVersion()">🔍 בדוק עדכונים</button>
+      <span id="ver-status" class="footer-ver-status"></span>
+    </div>
+    <div class="footer-export">
+      <button class="b bg bs" onclick="exportJSON()">💾 גיבוי JSON</button>
+      <button class="b bg bs" onclick="exportCSV()">📊 ייצוא Excel</button>
+      <label class="b bg bs footer-import-lbl">📤 ייבוא JSON<input type="file" accept=".json" style="display:none" onchange="importJSON(this.files[0]);this.value=''"></label>
+    </div>
+  </div>
   <p class="footer-credit">
     פותח על ידי <a href="https://www.linkedin.com/in/urielzion" target="_blank" rel="noopener noreferrer" class="footer-credit-link">אוריאל ציון</a>
     &nbsp;·&nbsp;
