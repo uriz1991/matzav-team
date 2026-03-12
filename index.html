@@ -10,7 +10,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0f1e;--card:#111827;--card2:#1a2236;--inp:#0d1220;--brd:rgba(99,110,150,0.14);--brdh:rgba(99,110,150,0.32);--t1:#e8ecf4;--t2:#8892a8;--t3:#5a6478;--acc:#6c5ce7;--red:#ff6b6b;--ora:#ffa94d;--yel:#ffd43b;--grn:#51cf66;--blu:#748ffc;--pur:#b197fc}
+:root{--bg:#0a0f1e;--card:#111827;--inp:#0d1220;--brd:rgba(99,110,150,0.14);--t1:#e8ecf4;--t2:#8892a8;--t3:#5a6478;--acc:#6c5ce7;--red:#ff6b6b;--ora:#ffa94d;--yel:#ffd43b;--grn:#51cf66;--blu:#748ffc}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Sans Hebrew','Segoe UI',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
 body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(108,92,231,0.05)0%,transparent 50%),radial-gradient(circle at 70% 80%,rgba(255,107,107,0.04)0%,transparent 50%);pointer-events:none}
@@ -23,56 +23,49 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .hero p{font-size:14px;color:var(--t2);line-height:1.6}
 .hero-sub{font-size:11px;color:var(--t3);margin-top:6px}
 
-/* FORM CARD */
+/* FORM */
 .card{background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--brd);margin-bottom:14px}
-.card-title{font-size:13px;font-weight:700;color:var(--t2);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.card-title{font-size:13px;font-weight:700;color:var(--t2);margin-bottom:14px}
 .fl{font-size:11px;font-weight:600;color:var(--t3);margin-bottom:5px;display:block}
 .fg{margin-bottom:14px}
 .fi{width:100%;padding:10px 12px;border-radius:10px;font-size:13px;font-family:inherit;background:var(--inp);color:var(--t1);border:1px solid var(--brd);outline:none}
 .fi:focus{border-color:var(--acc)}
 .fh{font-size:10px;color:var(--blu);margin-top:4px}
 .sel{width:100%;padding:10px 12px;border-radius:10px;font-size:13px;font-family:inherit;background:var(--inp);color:var(--t1);border:1px solid var(--brd);outline:none;cursor:pointer}
-.sel:focus{border-color:var(--acc)}
-
-/* TOGGLES */
 .trow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(99,110,150,0.07)}
 .trow:last-child{border-bottom:none}
 .trow-l{font-size:13px;color:var(--t1);display:flex;align-items:center;gap:7px}
 .trow-sub{font-size:10px;color:var(--t3);display:block;margin-top:1px}
 .tog{width:44px;height:24px;border-radius:12px;background:rgba(99,110,150,0.2);cursor:pointer;position:relative;transition:background .2s;border:none;padding:0;flex-shrink:0}
 .tog.on{background:var(--acc)}.tog::after{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;top:2px;right:2px;transition:transform .2s}.tog.on::after{transform:translateX(-20px)}
-
-/* KIDS */
 .kids-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .kid-row{display:flex;align-items:center;gap:8px;background:var(--inp);border-radius:8px;padding:7px 10px;margin-bottom:6px;border:1px solid rgba(99,110,150,0.07)}
 .kid-row span{font-size:16px}
 .kid-row input{width:55px;padding:4px 6px;border-radius:5px;font-size:12px;background:rgba(13,18,32,0.8);color:var(--t1);border:1px solid rgba(99,110,150,0.1);outline:none;font-family:inherit}
 .kid-row .kid-lbl{font-size:10px;color:var(--t3);flex:1}
 .kid-row button{background:rgba(255,107,107,0.1);color:var(--red);border:1px solid rgba(255,107,107,0.2);border-radius:5px;padding:3px 8px;cursor:pointer;font-size:11px;font-family:inherit}
-
-/* CALC BUTTON */
 .calc-btn{width:100%;padding:16px;border-radius:14px;font-size:16px;font-weight:800;border:none;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--acc),#8b7cf6);color:#fff;box-shadow:0 4px 20px rgba(108,92,231,0.35);transition:all .2s;margin-bottom:14px}
 .calc-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(108,92,231,0.45)}
-.calc-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .add-kid-btn{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:600;border:1px solid var(--brd);background:rgba(99,110,150,0.08);color:var(--t2);cursor:pointer;font-family:inherit}
 
 /* RESULT */
 .result{display:none;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.result-card{border-radius:20px;padding:28px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden}
+.result-card{border-radius:20px;padding:24px 20px 20px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden}
 .result-card::before{content:'';position:absolute;inset:0;opacity:.06;background:radial-gradient(circle at 50% 0%,#fff,transparent 70%)}
-.result-score{font-size:72px;font-weight:900;line-height:1;margin-bottom:4px}
-.result-max{font-size:18px;font-weight:400;opacity:.5}
-.result-emoji{font-size:40px;margin:8px 0}
-.result-level{font-size:22px;font-weight:800;margin-bottom:6px}
-.result-desc{font-size:13px;opacity:.8;margin-bottom:18px}
-.result-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px}
+.result-gauge{margin:0 auto 4px;position:relative}
+.gauge-label{font-size:11px;color:rgba(255,255,255,0.35);margin-top:-4px;margin-bottom:8px;letter-spacing:.5px}
+.result-emoji{font-size:36px;margin:2px 0 6px}
+.result-level{font-size:24px;font-weight:900;margin-bottom:6px}
+.result-desc{font-size:13px;opacity:.75;margin-bottom:16px}
+.result-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:18px}
 .result-tag{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(255,255,255,0.1)}
-.share-btn{padding:12px 24px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:inherit;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
-.share-btn:hover{background:rgba(255,255,255,0.25)}
-.share-copied{font-size:11px;color:rgba(255,255,255,0.6);margin-top:8px;height:16px}
-
-/* AGAIN BUTTON */
+.share-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.share-img-btn{padding:11px 22px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:inherit;color:#fff;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.share-img-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.share-txt-btn{padding:11px 18px;border-radius:12px;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,0.2);cursor:pointer;font-family:inherit;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.share-txt-btn:hover{background:rgba(255,255,255,0.14)}
+.share-status{font-size:11px;color:rgba(255,255,255,0.55);margin-top:8px;height:16px}
 .again-btn{width:100%;padding:12px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid var(--brd);background:rgba(99,110,150,0.08);color:var(--t2);cursor:pointer;font-family:inherit;margin-bottom:14px;transition:all .2s}
 .again-btn:hover{background:rgba(99,110,150,0.15);color:var(--t1)}
 
@@ -89,24 +82,20 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .footer-credit-link{color:#7eb8f7;text-decoration:none}
 .footer-credit-link:hover{text-decoration:underline}
 
-@media(max-width:480px){.hero h1{font-size:22px}.result-score{font-size:56px}.wrap{padding:14px 10px 32px}}
+@media(max-width:480px){.hero h1{font-size:22px}.wrap{padding:14px 10px 32px}.share-btns{flex-direction:column;align-items:center}.share-img-btn,.share-txt-btn{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- HERO -->
 <div class="hero">
   <span class="hero-icon">🔥</span>
   <h1>כמה אתה בלחץ<br>בגלל המצב?</h1>
   <p>קלקולטור עומס אישי — מחשב את הלחץ האמיתי שלך<br>לפי אזעקות, ילדים, מילואים, נסיעות ועוד</p>
-  <p class="hero-sub">30 שניות • בחינם • שתף את הציון שלך</p>
+  <p class="hero-sub">30 שניות • בחינם • שתף את התוצאה שלך</p>
 </div>
 
-<!-- QUIZ FORM -->
 <div id="quizForm">
-
-  <!-- מיקום -->
   <div class="card">
     <div class="card-title">📍 איפה אתה גר?</div>
     <div class="fg">
@@ -116,7 +105,6 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
     </div>
   </div>
 
-  <!-- משפחה -->
   <div class="card">
     <div class="card-title">👨‍👩‍👧‍👦 מצב משפחתי</div>
     <div class="fg">
@@ -142,7 +130,6 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
     </div>
   </div>
 
-  <!-- מצב המלחמה -->
   <div class="card">
     <div class="card-title">🛡️ השפעת המצב עליך</div>
     <div class="trow">
@@ -155,7 +142,6 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
     </div>
   </div>
 
-  <!-- נסיעה -->
   <div class="card">
     <div class="card-title">🚗 נסיעה לעבודה</div>
     <div class="fg">
@@ -180,22 +166,25 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 <!-- RESULT -->
 <div class="result" id="result">
   <div class="result-card" id="resultCard">
-    <div class="result-score" id="resultScore"></div>
+    <div class="result-gauge" id="resultGauge"></div>
+    <div class="gauge-label">מד העומס האישי</div>
     <div class="result-emoji" id="resultEmoji"></div>
     <div class="result-level" id="resultLevel"></div>
     <div class="result-desc" id="resultDesc"></div>
     <div class="result-tags" id="resultTags"></div>
-    <button class="share-btn" onclick="shareResult()">📤 שתף את הציון שלי</button>
-    <div class="share-copied" id="shareCopied"></div>
+    <div class="share-btns">
+      <button class="share-img-btn" id="shareImgBtn" onclick="shareImage()">📸 שתף תמונה</button>
+      <button class="share-txt-btn" onclick="copyText()">📋 העתק טקסט</button>
+    </div>
+    <div class="share-status" id="shareStatus"></div>
   </div>
   <button class="again-btn" onclick="resetForm()">🔄 חשב שוב</button>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-tools">
     <div class="footer-ver">
-      <span class="footer-ver-text">v2.0.0</span>
+      <span class="footer-ver-text">v2.1.0</span>
       <button class="b bg bs" onclick="checkVersion()">🔍 בדוק עדכונים</button>
       <span id="ver-status" class="footer-ver-status"></span>
     </div>
@@ -208,10 +197,10 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
   </p>
 </footer>
 
-</div><!-- /wrap -->
+</div>
 
 <script>
-const VERSION="2.0.0";
+const VERSION="2.1.0";
 const API="https://api.tzevaadom.co.il/alerts-history";
 const R={"עוטף עזה":["שדרות","נתיבות","אופקים","ניר עוז","כרם שלום","בארי","רעים","סעד","כיסופים","יד מרדכי"],"דרום":["אשקלון","אשדוד","באר שבע","קריית גת","ערד","דימונה","ירוחם","מצפה רמון","אילת"],"שפלה":["קריית מלאכי","גדרה","רחובות","נס ציונה","ראשון לציון","בית שמש","יבנה"],"מרכז":["תל אביב","רמת גן","בני ברק","חולון","בת ים","פתח תקווה","רמלה","לוד","מודיעין"],"השרון":["נתניה","הרצליה","רעננה","כפר סבא","הוד השרון","רמת השרון"],"שומרון":["אריאל","קדומים","קרני שומרון","אלקנה","ברקן","רבבה","יצהר","איתמר","עלי","שילה","בית אל","עפרה"],"צפון":["חיפה","עכו","נהריה","כרמיאל","צפת","טבריה","עפולה","מגדל העמק","קריית שמונה","מטולה","שלומי"],"ירושלים":["ירושלים","מעלה אדומים","גבעת זאב","אפרת","גוש עציון"],"יהודה":["חברון","קריית ארבע","ביתר עילית"]};
 const AF={baby:{l:"תינוק",f:2.0,e:"👶"},toddler:{l:"פעוט",f:1.7,e:"🧒"},child:{l:"ילד",f:1.3,e:"👦"},teen:{l:"נער",f:0.8,e:"🧑"}};
@@ -220,6 +209,7 @@ const LV=[{m:15,l:"יציב",c:"#51cf66",e:"😊",d:"מתפקד כרגיל — �
 
 let aR={},kids=[],toggles={partner:false,evac:false,prox:false,traffic:false};
 let ac=[...new Set(Object.values(R).flat())].sort((a,b)=>a.localeCompare(b,'he'));
+let curResult=null;
 
 function rg(c){for(const[r,cs]of Object.entries(R))if(cs.some(x=>c.includes(x)||x.includes(c)))return r;return null}
 function ag(a){a=+a;return a<=2?'baby':a<=5?'toddler':a<=12?'child':'teen'}
@@ -245,7 +235,7 @@ function renderKids(){
   });
 }
 
-function calcScore(city,family,ks,partner,evac,prox,commute,traffic){
+function calcScore(city,ks,partner,evac,prox,commute,traffic){
   const r=rg(city),al=r?(aR[r]||0):0;
   let s=al*2.5;
   if(ks.length>0){const cf=ks.reduce((t,c)=>t+(AF[c.a]?.f||1),0),nf=1+(ks.length-1)*.25;s*=cf*nf*.5}
@@ -259,58 +249,286 @@ function calcScore(city,family,ks,partner,evac,prox,commute,traffic){
 
 function calculate(){
   const city=document.getElementById('cityInp').value.trim();
-  const family=document.getElementById('familySel').value;
   const commute=document.getElementById('commuteSel').value;
-  const score=calcScore(city,family,kids,toggles.partner,toggles.evac,toggles.prox,commute,toggles.traffic);
-  showResult(score,city,family,commute);
-}
-
-function showResult(score,city,family,commute){
+  const score=calcScore(city,kids,toggles.partner,toggles.evac,toggles.prox,commute,toggles.traffic);
   const lv=gl(score);
-  document.getElementById('quizForm').style.display='none';
-  const res=document.getElementById('result');res.style.display='block';
-  const card=document.getElementById('resultCard');
-  card.style.background=`linear-gradient(135deg,${lv.c}22,${lv.c}11)`;
-  card.style.border=`1px solid ${lv.c}44`;
-  document.getElementById('resultScore').innerHTML=`<span style="color:${lv.c}">${score}</span><span class="result-max">/100</span>`;
-  document.getElementById('resultEmoji').textContent=lv.e;
-  document.getElementById('resultLevel').style.color=lv.c;
-  document.getElementById('resultLevel').textContent=lv.l;
-  document.getElementById('resultDesc').textContent=lv.d;
-
-  // tags
   const tags=[];
-  if(city){const r=rg(city);tags.push(r?`📍 ${r}`:(`📍 ${city}`))}
+  if(city){const r=rg(city);tags.push(r?`📍 ${r}`:`📍 ${city}`)}
   if(kids.length>0)tags.push(`👶 ${kids.length} ילדים`);
   if(toggles.partner)tags.push('🪖 זוג במיל׳');
   if(toggles.evac)tags.push('🏚️ מפונה');
   if(toggles.prox)tags.push('💔 קרבה לאירוע');
   if(commute!=='none')tags.push(`🚗 ${CF[commute]?.l}`);
   if(toggles.traffic)tags.push('🚧 פקקים');
-  const tagsEl=document.getElementById('resultTags');tagsEl.innerHTML='';
-  tags.forEach(t=>{const s=document.createElement('span');s.className='result-tag';s.textContent=t;tagsEl.appendChild(s)});
+  curResult={score,lv,tags};
+  showResult(curResult);
 }
 
-function shareResult(){
-  const score=document.getElementById('resultScore').textContent.replace('/100','').trim();
-  const level=document.getElementById('resultLevel').textContent;
-  const emoji=document.getElementById('resultEmoji').textContent;
-  const text=`${emoji} ציון העומס שלי בתקופת המלחמה: ${score}/100\n🔴 רמה: ${level}\n\nמה הציון שלך? בדוק גם אתה 👇\nhttps://uriz1991.github.io/matzav-team/`;
-  navigator.clipboard.writeText(text).then(()=>{
-    const el=document.getElementById('shareCopied');
-    el.textContent='✅ הועתק! פשוט הדבק בוואטסאפ / פייסבוק';
-    setTimeout(()=>el.textContent='',4000);
-  }).catch(()=>{
-    prompt('העתק את הטקסט:',text);
+// ── SVG GAUGE ──────────────────────────────────────────────
+function gaugeSVG(score, color) {
+  const r=80, cx=100, cy=100;
+  const C=2*Math.PI*r, half=Math.PI*r; // half = semicircle arc length
+  const sLen=(score/100)*half;
+  const rot=`rotate(180 ${cx} ${cy})`; // start at left (9 o'clock), CW through top
+
+  // Dim color bands (scale reference)
+  const bands=[
+    [0,0.30,'#51cf66'],
+    [0.30,0.50,'#ffd43b'],
+    [0.50,0.70,'#ffa94d'],
+    [0.70,1.00,'#ff6b6b']
+  ].map(([s,e,c])=>
+    `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${c}" stroke-width="10"
+      stroke-dasharray="${(e-s)*half} ${C}" stroke-dashoffset="${-s*half}"
+      transform="${rot}" opacity="0.22"/>`
+  ).join('');
+
+  // Background track
+  const bg=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(99,110,150,0.1)"
+    stroke-width="12" stroke-dasharray="${half} ${C}" transform="${rot}"/>`;
+
+  // Score arc (drawn on top, bright)
+  const sa=score>0?`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}"
+    stroke-width="12" stroke-linecap="round"
+    stroke-dasharray="${sLen} ${C}" transform="${rot}"/>` : '';
+
+  // Tick marks at 0, 25, 50, 75, 100 (on the arc)
+  const ticks=[0,25,50,75,100].map(v=>{
+    const a=Math.PI+(v/100)*Math.PI; // CW from left
+    const ri=r-10, ro=r+10;
+    const xi=(cx+ri*Math.cos(a)).toFixed(1), yi=(cy+ri*Math.sin(a)).toFixed(1);
+    const xo=(cx+ro*Math.cos(a)).toFixed(1), yo=(cy+ro*Math.sin(a)).toFixed(1);
+    return `<line x1="${xi}" y1="${yi}" x2="${xo}" y2="${yo}" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>`;
+  }).join('');
+
+  // Needle: starts pointing UP (12 o'clock) initially, JS animates it
+  // Initial: score=0 → rotate -90 (pointing left); final: rotate (score/100)*180-90
+  const nLen=r-20;
+  return `<svg viewBox="5 8 190 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:290px;display:block;margin:0 auto;overflow:visible">
+    ${bg}${bands}${sa}${ticks}
+    <g id="gNeedle" transform="translate(${cx},${cy}) rotate(-90)">
+      <line x1="0" y1="0" x2="0" y2="-${nLen}" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <circle cx="${cx}" cy="${cy}" r="5.5" fill="${color}" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  </svg>`;
+}
+
+function animateNeedle(score) {
+  const el=document.getElementById('gNeedle');
+  if(!el)return;
+  const cx=100, cy=100;
+  const target=(score/100)*180-90;
+  const start=-90, dur=1300, t0=performance.now();
+  function ease(t){const c4=2*Math.PI/3;return t===0?0:t===1?1:Math.pow(2,-10*t)*Math.sin((t*10-0.75)*c4)+1}
+  function tick(now){
+    const p=Math.min((now-t0)/dur,1);
+    const a=start+(target-start)*ease(p);
+    el.setAttribute('transform',`translate(${cx},${cy}) rotate(${a})`);
+    if(p<1)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ── CANVAS SHARE IMAGE ─────────────────────────────────────
+function drawGaugeCanvas(ctx, score, color, cx, cy, r) {
+  // CW from left (Math.PI) → through top (3π/2) → to right (2π)
+  const startA=Math.PI, endA=Math.PI+(score/100)*Math.PI;
+  const sw=20;
+
+  // Color bands
+  const bands=[
+    [Math.PI, Math.PI*1.3,'#51cf66'],
+    [Math.PI*1.3, Math.PI*1.5,'#ffd43b'],
+    [Math.PI*1.5, Math.PI*1.7,'#ffa94d'],
+    [Math.PI*1.7, Math.PI*2,'#ff6b6b']
+  ];
+  bands.forEach(([a1,a2,c])=>{
+    ctx.beginPath();ctx.arc(cx,cy,r,a1,a2,false);
+    ctx.strokeStyle=c;ctx.lineWidth=sw-2;ctx.globalAlpha=0.22;
+    ctx.lineCap='butt';ctx.stroke();
   });
+  ctx.globalAlpha=1;
+
+  // Background track
+  ctx.beginPath();ctx.arc(cx,cy,r,Math.PI,Math.PI*2,false);
+  ctx.strokeStyle='rgba(99,110,150,0.12)';ctx.lineWidth=sw;ctx.lineCap='round';ctx.stroke();
+
+  // Score arc
+  if(score>0){
+    ctx.beginPath();ctx.arc(cx,cy,r,startA,endA,false);
+    ctx.strokeStyle=color;ctx.lineWidth=sw;ctx.lineCap='round';ctx.stroke();
+  }
+
+  // Tick marks
+  [0,25,50,75,100].forEach(v=>{
+    const a=Math.PI+(v/100)*Math.PI;
+    const ri=r-12, ro=r+12;
+    ctx.beginPath();
+    ctx.moveTo(cx+ri*Math.cos(a),cy+ri*Math.sin(a));
+    ctx.lineTo(cx+ro*Math.cos(a),cy+ro*Math.sin(a));
+    ctx.strokeStyle='rgba(255,255,255,0.18)';ctx.lineWidth=2;ctx.lineCap='round';ctx.stroke();
+  });
+
+  // Needle
+  const na=Math.PI+(score/100)*Math.PI;
+  const nLen=r-24;
+  ctx.beginPath();
+  ctx.moveTo(cx,cy);
+  ctx.lineTo(cx+nLen*Math.cos(na),cy+nLen*Math.sin(na));
+  ctx.strokeStyle='rgba(255,255,255,0.95)';ctx.lineWidth=3.5;ctx.lineCap='round';ctx.stroke();
+
+  // Needle back stub
+  ctx.beginPath();
+  ctx.moveTo(cx,cy);
+  ctx.lineTo(cx+8*Math.cos(na+Math.PI),cy+8*Math.sin(na+Math.PI));
+  ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.lineWidth=2.5;ctx.stroke();
+
+  // Center dot
+  ctx.beginPath();ctx.arc(cx,cy,7,0,Math.PI*2);
+  ctx.fillStyle=color;ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,7,0,Math.PI*2);
+  ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=2;ctx.stroke();
+}
+
+async function generateShareCanvas(result) {
+  await document.fonts.ready;
+  const W=600, H=440;
+  const canvas=document.createElement('canvas');
+  canvas.width=W; canvas.height=H;
+  const ctx=canvas.getContext('2d');
+  const {score,lv,tags}=result;
+
+  // Background
+  const bg=ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#0d1526'); bg.addColorStop(1,'#080d1a');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+  // Subtle glow overlay
+  const glow=ctx.createRadialGradient(W/2,0,0,W/2,0,W*0.7);
+  glow.addColorStop(0,lv.c+'18'); glow.addColorStop(1,'transparent');
+  ctx.fillStyle=glow; ctx.fillRect(0,0,W,H);
+
+  // Rounded border
+  ctx.strokeStyle=lv.c+'55'; ctx.lineWidth=2;
+  roundRect(ctx,1,1,W-2,H-2,18); ctx.stroke();
+
+  // App name (top center)
+  ctx.direction='rtl'; ctx.textAlign='center';
+  ctx.font='500 15px "Noto Sans Hebrew",Arial,sans-serif';
+  ctx.fillStyle='rgba(255,255,255,0.3)';
+  ctx.fillText('🔥  מד העומס האישי', W/2, 36);
+
+  // Gauge
+  drawGaugeCanvas(ctx, score, lv.c, W/2, 235, 140);
+
+  // Level label below gauge center line
+  ctx.font='bold 30px "Noto Sans Hebrew",Arial,sans-serif';
+  ctx.fillStyle=lv.c; ctx.shadowColor=lv.c+'66'; ctx.shadowBlur=18;
+  ctx.fillText(lv.l, W/2, 300);
+  ctx.shadowBlur=0;
+
+  // Emoji
+  ctx.font='28px serif';
+  ctx.fillStyle='#fff';
+  ctx.fillText(lv.e, W/2, 338);
+
+  // Tags row
+  if(tags.length>0){
+    const tagText=tags.join('   ·   ');
+    ctx.font='13px "Noto Sans Hebrew",Arial,sans-serif';
+    ctx.fillStyle='rgba(255,255,255,0.45)';
+    ctx.fillText(tagText, W/2, 375);
+  }
+
+  // Divider
+  ctx.beginPath();ctx.moveTo(60,398);ctx.lineTo(W-60,398);
+  ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=1;ctx.stroke();
+
+  // URL
+  ctx.font='12px "Noto Sans Hebrew",Arial,sans-serif';
+  ctx.fillStyle='rgba(255,255,255,0.2)';
+  ctx.fillText('uriz1991.github.io/matzav-team', W/2, 420);
+
+  return canvas;
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+}
+
+async function shareImage() {
+  if(!curResult)return;
+  const btn=document.getElementById('shareImgBtn');
+  btn.textContent='⏳ מכין תמונה...'; btn.disabled=true;
+  try {
+    const canvas=await generateShareCanvas(curResult);
+    canvas.toBlob(async blob=>{
+      btn.textContent='📸 שתף תמונה'; btn.disabled=false;
+      const file=new File([blob],'matzav-score.png',{type:'image/png'});
+      if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:`מד העומס שלי: ${curResult.lv.l}`,text:`בדקתי את מד העומס שלי. מה הציון שלך? 👇`});
+      } else {
+        // desktop: download
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');a.href=url;a.download='matzav-score.png';a.click();
+        URL.revokeObjectURL(url);
+        showStatus('✅ התמונה הורדה — אפשר לשתף');
+      }
+    },'image/png');
+  } catch(e) {
+    btn.textContent='📸 שתף תמונה'; btn.disabled=false;
+    showStatus('❌ שגיאה ביצירת התמונה');
+  }
+}
+
+function copyText() {
+  if(!curResult)return;
+  const {lv,tags}=curResult;
+  const text=`${lv.e} בדקתי את מד העומס האישי שלי\nרמה: ${lv.l}\n${tags.join(' · ')}\n\nמה הציון שלך? 👇\nhttps://uriz1991.github.io/matzav-team/`;
+  navigator.clipboard.writeText(text).then(()=>showStatus('✅ הועתק! הדבק בוואטסאפ / פייסבוק')).catch(()=>{prompt('העתק:',text)});
+}
+
+function showStatus(msg){
+  const el=document.getElementById('shareStatus');
+  el.textContent=msg; setTimeout(()=>el.textContent='',4000);
+}
+
+function showResult(res) {
+  document.getElementById('quizForm').style.display='none';
+  const el=document.getElementById('result');el.style.display='block';
+  const card=document.getElementById('resultCard');
+  card.style.background=`linear-gradient(145deg,${res.lv.c}1a,${res.lv.c}0a)`;
+  card.style.border=`1px solid ${res.lv.c}44`;
+
+  // Gauge
+  document.getElementById('resultGauge').innerHTML=gaugeSVG(res.score, res.lv.c);
+  setTimeout(()=>animateNeedle(res.score), 80);
+
+  // Share button color
+  document.getElementById('shareImgBtn').style.background=`linear-gradient(135deg,${res.lv.c},${res.lv.c}cc)`;
+  document.getElementById('shareImgBtn').style.boxShadow=`0 4px 18px ${res.lv.c}55`;
+
+  document.getElementById('resultEmoji').textContent=res.lv.e;
+  document.getElementById('resultLevel').style.color=res.lv.c;
+  document.getElementById('resultLevel').textContent=res.lv.l;
+  document.getElementById('resultDesc').textContent=res.lv.d;
+
+  const tagsEl=document.getElementById('resultTags');tagsEl.innerHTML='';
+  res.tags.forEach(t=>{const s=document.createElement('span');s.className='result-tag';s.textContent=t;tagsEl.appendChild(s)});
 }
 
 function resetForm(){
   document.getElementById('result').style.display='none';
   document.getElementById('quizForm').style.display='block';
+  curResult=null;
 }
 
-// City autocomplete + hint
+// City autocomplete
 const cityInp=document.getElementById('cityInp');
 const cityHint=document.getElementById('cityHint');
 cityInp.addEventListener('input',()=>{
@@ -318,11 +536,9 @@ cityInp.addEventListener('input',()=>{
   cityHint.textContent=r?`📍 ${r} • ${aR[r]||0} התרעות ב-7 ימים`:'';
 });
 
-// Load alerts
 async function loadAlerts(){
   try{
-    const resp=await fetch(API);
-    if(!resp.ok)throw 0;
+    const resp=await fetch(API);if(!resp.ok)throw 0;
     const data=await resp.json();
     const rc={};const allC=new Set(Object.values(R).flat());
     const cut=Date.now()-7*864e5;
@@ -331,15 +547,14 @@ async function loadAlerts(){
       if(new Date(a.alertDate).getTime()<cut)return;
       (a.cities||[a.data]).forEach(c=>{if(!c)return;for(const[r,cs]of Object.entries(R))if(cs.some(x=>c.includes(x)||x.includes(c)))rc[r]=(rc[r]||0)+1});
     });
-    aR=rc;
-    ac=[...allC].sort((a,b)=>a.localeCompare(b,'he'));
-  }catch{/* use empty */}
+    aR=rc; ac=[...allC].sort((a,b)=>a.localeCompare(b,'he'));
+  }catch{/* silent */}
   const dl=document.getElementById('cityList');
   ac.forEach(c=>{const o=document.createElement('option');o.value=c;dl.appendChild(o)});
 }
 
 function cmpV(a,b){const pa=a.split('.').map(Number),pb=b.split('.').map(Number);for(let i=0;i<Math.max(pa.length,pb.length);i++){const d=(pa[i]||0)-(pb[i]||0);if(d!==0)return d}return 0}
-async function checkVersion(){const el=document.getElementById('ver-status');if(!el)return;el.textContent='⏳ בודק...';try{const r=await fetch('./index.html?_='+Date.now(),{cache:'no-store'});const txt=await r.text();const m=txt.match(/const VERSION\s*=\s*["']([^"']+)['"]/);if(!m){el.textContent='❓ לא ניתן לבדוק';return}const lv=m[1];if(cmpV(lv,VERSION)>0){el.innerHTML=`🆕 גרסה ${lv} זמינה — <a href="javascript:location.reload(true)" style="color:#748ffc">רענן לעדכון</a>`}else{el.textContent='✅ הגרסה עדכנית'}}catch{el.textContent='❌ שגיאה בבדיקה'}}
+async function checkVersion(){const el=document.getElementById('ver-status');if(!el)return;el.textContent='⏳ בודק...';try{const r=await fetch('./index.html?_='+Date.now(),{cache:'no-store'});const txt=await r.text();const m=txt.match(/const VERSION\s*=\s*["']([^"']+)['"]/);if(!m){el.textContent='❓ לא ניתן לבדוק';return}const lv=m[1];if(cmpV(lv,VERSION)>0){el.innerHTML=`🆕 גרסה ${lv} — <a href="javascript:location.reload(true)" style="color:#748ffc">רענן</a>`}else{el.textContent='✅ עדכני'}}catch{el.textContent='❌ שגיאה'}}
 
 loadAlerts();
 </script>
