@@ -205,9 +205,14 @@ function ram(){
 
   // City
   fg=h('div',{className:'fg'});fg.appendChild(h('label',{className:'fl'},'יישוב'));
-  const ci=h('input',{className:'fi',placeholder:'הקלד יישוב...',value:S.fc,list:'cl'});ci.addEventListener('input',e=>{S.fc=e.target.value;rr()});fg.appendChild(ci);
-  const dl=h('datalist',{id:'cl'});ac.forEach(c=>dl.appendChild(h('option',{value:c})));fg.appendChild(dl);
-  if(S.fc&&rg(S.fc)){const r=rg(S.fc);fg.appendChild(h('div',{className:'fh'},`📍 ${r} • ${S.aR[r]||0} התרעות`))}m.appendChild(fg);
+  const ci=h('input',{className:'fi',placeholder:'הקלד יישוב...',value:S.fc,list:'cl'});
+  const cityHint=h('div',{className:'fh'});
+  const updHint=()=>{const r=rg(S.fc);cityHint.textContent=r?`📍 ${r} • ${S.aR[r]||0} התרעות`:''};
+  updHint();
+  ci.addEventListener('input',e=>{S.fc=e.target.value;updHint()});
+  fg.appendChild(ci);
+  const dtl=h('datalist',{id:'cl'});ac.forEach(c=>dtl.appendChild(h('option',{value:c})));fg.appendChild(dtl);
+  fg.appendChild(cityHint);m.appendChild(fg);
 
   // Family
   m.appendChild(h('div',{className:'st0'},'👨‍👩‍👧‍👦 מצב משפחתי'));
