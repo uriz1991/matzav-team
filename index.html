@@ -84,6 +84,11 @@ body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;backgro
 .fm{background:var(--card);border-radius:12px;padding:16px;border:1px solid rgba(99,110,150,0.07);margin-top:20px}
 .fm h3{font-size:12px;font-weight:700;color:var(--t2);margin-bottom:8px}.fm .txt{font-size:10px;color:var(--t3);line-height:1.8}.fm strong{color:var(--t2)}.fm .hl{color:var(--blu)}
 .ft{text-align:center;padding:16px;margin-top:18px;font-size:9px;color:var(--t3)}
+.footer{text-align:center;padding:4px 16px 16px;margin-top:8px}
+.footer-credit{font-size:0.6rem;color:var(--t3);margin-top:4px;opacity:0.6}
+.footer-credit-link{color:#7eb8f7;text-decoration:none}
+.footer-credit-link:hover{text-decoration:underline}
+.no-ads-badge{font-size:0.6rem;color:var(--t3);margin-top:4px;opacity:0.6}
 @media(max-width:600px){.hdr{padding:12px 14px}.ct{padding:14px 10px}.sts{grid-template-columns:1fr 1fr}.dg{grid-template-columns:1fr 1fr}.ec{flex-wrap:wrap}.eb{display:none}}
 </style>
 </head>
@@ -262,5 +267,13 @@ function rdm(){
 }
 fa();
 </script>
+<footer class="footer">
+  <p class="no-ads-badge">ללא פרסומות. לתמיד.</p>
+  <p class="footer-credit">
+    פותח על ידי <a href="https://www.linkedin.com/in/urielzion" target="_blank" rel="noopener noreferrer" class="footer-credit-link">אוריאל ציון</a>
+    &nbsp;·&nbsp;
+    Developed by <a href="https://www.linkedin.com/in/urielzion" target="_blank" rel="noopener noreferrer" class="footer-credit-link">Uriel Zion</a>
+  </p>
+</footer>
 </body>
 </html>
