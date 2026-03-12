@@ -110,7 +110,7 @@ const RC={low:["✅ חיזוקים ותקשורת פתוחה","✅ וודא שה
 
 let S={emps:JSON.parse(localStorage.getItem('mt_e')||'[]'),al:[],aR:{},api:"idle",ld:false,dy:7,sr:"",so:"stress",sa:false,eid:null,sel:null,fn:"",fc:"",fs:"single",fk:[],fp:false,fcm:"short",fe:false,fx:false,fcs:false};
 const sv=()=>localStorage.setItem('mt_e',JSON.stringify(S.emps));
-const ac=[...new Set(Object.values(R).flat())].sort((a,b)=>a.localeCompare(b,'he'));
+let ac=[...new Set(Object.values(R).flat())].sort((a,b)=>a.localeCompare(b,'he'));
 function rg(c){for(const[r,cs]of Object.entries(R))if(cs.some(x=>c.includes(x)||x.includes(c)))return r;return null}
 function ag(a){a=+a;return a<=2?'baby':a<=5?'toddler':a<=12?'child':'teen'}
 function sc(e){const r=rg(e.city),al=r?(S.aR[r]||0):0;let s=al*2.5;if(e.ch?.length>0){const cf=e.ch.reduce((s,c)=>s+(AF[c.a]?.f||1),0),nf=1+(e.ch.length-1)*.25;s*=cf*nf*.5}if(e.pr)s+=20;s+=(CF[e.cm]?.f||0)*5;if(e.cs)s+=8;if(e.ev)s+=15;if(e.px)s+=18;return Math.min(Math.round(s),100)}
@@ -118,7 +118,7 @@ function gl(s){return LV.find(l=>s<=l.m)||LV[LV.length-1]}
 function gr(s){return s<=25?RC.low:s<=55?RC.med:RC.high}
 
 function gd(){const cs=["שדרות","אשקלון","אשדוד","באר שבע","תל אביב","נתיבות","קריית שמונה","חיפה","ירושלים","אריאל","קדומים","עפרה","רעננה","מטולה","צפת"];const a=[];const n=Date.now();for(let i=0;i<7;i++){const c=Math.floor(Math.random()*8)+1;for(let j=0;j<c;j++){const ci=cs[Math.floor(Math.random()*cs.length)];a.push({alertDate:new Date(n-i*864e5-Math.random()*864e5).toISOString(),data:ci,cities:[ci]})}}return a}
-function pa(d){const rc={};const ct=Date.now()-S.dy*864e5;d.forEach(a=>{if(new Date(a.alertDate).getTime()<ct)return;(a.cities||[a.data]).forEach(c=>{if(!c)return;for(const[r,rcs]of Object.entries(R))if(rcs.some(x=>c.includes(x)||x.includes(c)))rc[r]=(rc[r]||0)+1})});S.aR=rc}
+function pa(d){const rc={};const ct=Date.now()-S.dy*864e5;const allCities=new Set(Object.values(R).flat());d.forEach(a=>{(a.cities||[a.data]).forEach(c=>{if(c)allCities.add(c)});if(new Date(a.alertDate).getTime()<ct)return;(a.cities||[a.data]).forEach(c=>{if(!c)return;for(const[r,rcs]of Object.entries(R))if(rcs.some(x=>c.includes(x)||x.includes(c)))rc[r]=(rc[r]||0)+1})});S.aR=rc;ac=[...allCities].sort((a,b)=>a.localeCompare(b,'he'))}
 async function fa(){S.ld=true;rr();try{const r=await fetch(API);if(r.ok){S.al=await r.json();S.api="connected"}else throw 0}catch{S.al=gd();S.api="demo"}pa(S.al);S.ld=false;rr()}
 
 function h(t,a,...ch){const el=document.createElement(t);if(a)for(const[k,v]of Object.entries(a)){if(k==='style'&&typeof v==='object')Object.assign(el.style,v);else if(k.startsWith('on'))el.addEventListener(k.slice(2).toLowerCase(),v);else if(k==='className')el.className=v;else if(k==='innerHTML')el.innerHTML=v;else el.setAttribute(k,v)}ch.flat(Infinity).forEach(c=>{if(c==null||c===false)return;el.appendChild(typeof c==='string'||typeof c==='number'?document.createTextNode(c):c)});return el}
