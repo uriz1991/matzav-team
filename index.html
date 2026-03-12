@@ -331,8 +331,6 @@ function calculate(){
   const score=calcScore(city,kids,toggles.partner,toggles.evac,toggles.prox,commute,toggles.traffic,work,toggles.sleep,toggles.cancel,support);
   const lv=gl(score);
   const tags=[];
-  // stash for advanced tag rendering
-  window._advWork=work; window._advSupport=support;
   if(city){const r=rg(city);tags.push(r?`📍 ${r}`:`📍 ${city}`)}
   if(kids.length>0)tags.push(`👶 ${kids.length} ילדים`);
   if(toggles.partner)tags.push('🪖 זוג במיל׳');
@@ -340,8 +338,6 @@ function calculate(){
   if(toggles.prox)tags.push('💔 קרבה לאירוע');
   if(commute!=='none')tags.push(`🚗 ${CF[commute]?.l}`);
   if(toggles.traffic)tags.push('🚧 פקקים');
-  // advanced
-  const work=window._advWork||'none', support=window._advSupport||'medium';
   if(work&&work!=='none')tags.push({medium:'💼 עומס בינוני',high:'🔥 עומס גבוה',uncertain:'😨 חוסר ודאות'}[work]||'');
   if(toggles.sleep)tags.push('😴 חסך שינה');
   if(toggles.cancel)tags.push('❌ שיבושים');
