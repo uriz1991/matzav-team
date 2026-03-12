@@ -3,300 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>מצב הצוות | כלי ניהולי לרווחת עובדים</title>
-<meta name="description" content="כלי ניהולי למנהלים - מעקב מצב רוחני ופיזי של עובדים בתקופת מלחמה. התרעות, מילואים, פקקים, ילדים ועוד.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<title>כמה אתה בלחץ? | מדד העומס האישי</title>
+<meta name="description" content="בדוק את ציון העומס האישי שלך בתקופת המלחמה — אזעקות, ילדים, מילואים, נסיעות ועוד. שתף את התוצאה!">
+<meta property="og:title" content="כמה אתה בלחץ? בדוק את הציון שלך 🔥">
+<meta property="og:description" content="קלקולטור עומס אישי — מחשב את הלחץ האמיתי שלך בתקופת המלחמה">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0f1e;--card:#111827;--card2:#1a2236;--inp:#0d1220;--brd:rgba(99,110,150,0.14);--brdh:rgba(99,110,150,0.32);--t1:#e8ecf4;--t2:#8892a8;--t3:#5a6478;--acc:#6c5ce7;--red:#ff6b6b;--ora:#ffa94d;--yel:#ffd43b;--grn:#51cf66;--blu:#748ffc;--pur:#b197fc}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Sans Hebrew','Segoe UI',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
-body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(108,92,231,0.04)0%,transparent 50%),radial-gradient(circle at 70% 80%,rgba(255,107,107,0.03)0%,transparent 50%);pointer-events:none}
-.app{position:relative;z-index:1}
-.hdr{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--brd);background:rgba(13,18,32,0.85);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-i{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--acc),#8b7cf6);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 20px rgba(108,92,231,0.3)}
-.logo h1{font-size:18px;font-weight:800;background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.logo p{font-size:10px;color:var(--t3)}
-.ha{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.bdg{padding:4px 11px;border-radius:16px;font-size:10px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
-.bdg-g{background:rgba(81,207,102,0.1);color:var(--grn);border:1px solid rgba(81,207,102,0.2)}
-.bdg-y{background:rgba(255,212,59,0.1);color:var(--yel);border:1px solid rgba(255,212,59,0.2)}
-.b{padding:7px 14px;border-radius:9px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:5px}
-.b:hover{transform:translateY(-1px)}.bp{background:linear-gradient(135deg,var(--acc),#8b7cf6);color:#fff;box-shadow:0 3px 12px rgba(108,92,231,0.25)}
-.bg{background:rgba(99,110,150,0.1);color:var(--t2);border:1px solid var(--brd)}.bd{background:rgba(255,107,107,0.1);color:var(--red);border:1px solid rgba(255,107,107,0.2)}
-.bs{padding:4px 9px;font-size:10px;border-radius:7px}.bok{background:linear-gradient(135deg,var(--grn),#3cb85c);color:#fff}
-.ct{max-width:1140px;margin:0 auto;padding:20px 14px}
-.sts{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin-bottom:18px}
-.st{background:var(--card);border-radius:12px;padding:13px 16px;border:1px solid var(--brd);display:flex;align-items:center;gap:12px;transition:all .2s}
-.st:hover{transform:translateY(-2px);border-color:var(--brdh)}
-.st-i{font-size:24px}.st-v{font-size:22px;font-weight:800;line-height:1}.st-l{font-size:10px;color:var(--t3)}
-.ctr{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
-.inp,.sel{padding:8px 12px;border-radius:9px;font-size:12px;font-family:inherit;background:var(--inp);color:var(--t1);border:1px solid var(--brd);outline:none}
-.inp:focus,.sel:focus{border-color:var(--acc)}.inp{min-width:140px;flex:1 1 140px}.sel{cursor:pointer}
-.rm{background:var(--card);border-radius:14px;padding:16px;border:1px solid var(--brd);margin-bottom:18px}
-.rm h3{font-size:13px;font-weight:700;margin-bottom:10px}
-.chs{display:flex;flex-wrap:wrap;gap:6px}
-.ch{padding:7px 12px;border-radius:9px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:78px;position:relative;transition:all .2s;font-size:10px}
-.ch:hover{transform:scale(1.05)}.ch-n{font-weight:600}.ch-c{font-size:15px;font-weight:800}
-.ch-d{position:absolute;top:-3px;right:-3px;width:7px;height:7px;border-radius:50%;background:var(--blu);border:2px solid var(--bg)}
-.el{display:flex;flex-direction:column;gap:7px}
-.ec{background:var(--card);border-radius:13px;padding:13px 16px;border:1px solid var(--brd);display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.ec:hover{background:var(--card2);border-color:var(--brdh);transform:translateX(-3px)}
-.ec .br{position:absolute;right:0;top:0;bottom:0;width:3px;border-radius:0 13px 13px 0}
-.ee{width:38px;height:38px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
-.ei{flex:1;min-width:0}.en{font-size:13px;font-weight:700}
-.em{font-size:10px;color:var(--t3);margin-top:1px;display:flex;flex-wrap:wrap;gap:6px}
-.em span{display:inline-flex;align-items:center;gap:2px}
-.es{text-align:center;min-width:50px}.esn{font-size:20px;font-weight:900;line-height:1}.esl{font-size:9px;font-weight:600}
-.eb{width:50px;flex-shrink:0}.ebb{height:4px;border-radius:2px;background:rgba(99,110,150,0.1);overflow:hidden}.ebf{height:100%;border-radius:2px;transition:width .6s}
-.ea{display:flex;gap:4px}
-.tg{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
-.tgi{padding:2px 7px;border-radius:6px;font-size:9px;font-weight:600}
-.ey{text-align:center;padding:45px 18px;background:var(--card);border-radius:16px;border:1px dashed rgba(99,110,150,0.2)}
-.ey .ic{font-size:44px;margin-bottom:12px}.ey h3{color:var(--t2);font-size:16px;margin-bottom:5px}.ey p{color:var(--t3);font-size:11px;margin-bottom:16px}
-.mo{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);padding:14px;animation:fi .2s}
-@keyframes fi{from{opacity:0}to{opacity:1}}
-.ml{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--brd);max-width:540px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,0.5);animation:su .25s}
-@keyframes su{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
-.ml h2{font-size:17px;font-weight:800;margin-bottom:16px}
-.fg{margin-bottom:12px}.fl{font-size:10px;font-weight:600;color:var(--t3);margin-bottom:4px;display:block}
-.fi{width:100%;padding:9px 12px;border-radius:9px;font-size:12px;font-family:inherit;background:var(--inp);color:var(--t1);border:1px solid var(--brd);outline:none}
-.fi:focus{border-color:var(--acc)}.fh{font-size:9px;color:var(--blu);margin-top:3px}
-.fr{display:flex;gap:8px;align-items:center;margin-bottom:6px;padding:6px 9px;border-radius:8px;background:var(--inp);border:1px solid rgba(99,110,150,0.07)}
-.fr .fre{font-size:16px}
-.fr input[type=number]{width:55px;padding:4px 6px;border-radius:5px;font-size:11px;background:rgba(13,18,32,0.8);color:var(--t1);border:1px solid rgba(99,110,150,0.1);outline:none;font-family:inherit}
-.fr .frl{font-size:9px;color:var(--t3);flex:1}
-.fa{display:flex;gap:7px;margin-top:16px}.fa .b{flex:1;justify-content:center;padding:10px}
-.st0{font-size:11px;font-weight:700;color:var(--t2);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--brd)}
-.tr{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
-.tr .trl{font-size:12px;color:var(--t1);display:flex;align-items:center;gap:6px}
-.to{width:40px;height:22px;border-radius:11px;background:rgba(99,110,150,0.2);cursor:pointer;position:relative;transition:background .2s;border:none;padding:0}
-.to.on{background:var(--acc)}.to::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;right:2px;transition:transform .2s}.to.on::after{transform:translateX(-18px)}
-.gu{background:var(--inp);border-radius:12px;padding:14px;border:1px solid rgba(99,110,150,0.07);margin-bottom:12px}
-.gut{display:flex;justify-content:space-between;margin-bottom:5px}
-.gub{height:7px;border-radius:4px;background:rgba(99,110,150,0.1);overflow:hidden}
-.guf{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--grn),var(--yel),var(--ora),var(--red))}
-.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-bottom:12px}
-.db{background:var(--inp);border-radius:10px;padding:10px;border:1px solid rgba(99,110,150,0.07)}
-.db .dbl{font-size:9px;color:var(--t3);margin-bottom:2px}.db .dbv{font-size:18px;font-weight:800}.db .dbs{font-size:8px;color:var(--t3)}
-.rc{border-radius:10px;padding:12px;margin-bottom:12px}.rct{font-size:11px;font-weight:700;margin-bottom:7px}.rci{font-size:11px;color:var(--t2);margin-bottom:4px;line-height:1.5}
-.fm{background:var(--card);border-radius:12px;padding:16px;border:1px solid rgba(99,110,150,0.07);margin-top:20px}
-.fm h3{font-size:12px;font-weight:700;color:var(--t2);margin-bottom:8px}.fm .txt{font-size:10px;color:var(--t3);line-height:1.8}.fm strong{color:var(--t2)}.fm .hl{color:var(--blu)}
-.ft{text-align:center;padding:16px;margin-top:18px;font-size:9px;color:var(--t3)}
+body::before{content:'';position:fixed;inset:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(108,92,231,0.05)0%,transparent 50%),radial-gradient(circle at 70% 80%,rgba(255,107,107,0.04)0%,transparent 50%);pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:20px 14px 40px}
+
+/* HERO */
+.hero{text-align:center;padding:36px 0 28px}
+.hero-icon{font-size:52px;margin-bottom:12px;display:block}
+.hero h1{font-size:28px;font-weight:900;background:linear-gradient(135deg,#ff6b6b,#ffa94d,#ffd43b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;line-height:1.2}
+.hero p{font-size:14px;color:var(--t2);line-height:1.6}
+.hero-sub{font-size:11px;color:var(--t3);margin-top:6px}
+
+/* FORM CARD */
+.card{background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--brd);margin-bottom:14px}
+.card-title{font-size:13px;font-weight:700;color:var(--t2);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.fl{font-size:11px;font-weight:600;color:var(--t3);margin-bottom:5px;display:block}
+.fg{margin-bottom:14px}
+.fi{width:100%;padding:10px 12px;border-radius:10px;font-size:13px;font-family:inherit;background:var(--inp);color:var(--t1);border:1px solid var(--brd);outline:none}
+.fi:focus{border-color:var(--acc)}
+.fh{font-size:10px;color:var(--blu);margin-top:4px}
+.sel{width:100%;padding:10px 12px;border-radius:10px;font-size:13px;font-family:inherit;background:var(--inp);color:var(--t1);border:1px solid var(--brd);outline:none;cursor:pointer}
+.sel:focus{border-color:var(--acc)}
+
+/* TOGGLES */
+.trow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(99,110,150,0.07)}
+.trow:last-child{border-bottom:none}
+.trow-l{font-size:13px;color:var(--t1);display:flex;align-items:center;gap:7px}
+.trow-sub{font-size:10px;color:var(--t3);display:block;margin-top:1px}
+.tog{width:44px;height:24px;border-radius:12px;background:rgba(99,110,150,0.2);cursor:pointer;position:relative;transition:background .2s;border:none;padding:0;flex-shrink:0}
+.tog.on{background:var(--acc)}.tog::after{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;top:2px;right:2px;transition:transform .2s}.tog.on::after{transform:translateX(-20px)}
+
+/* KIDS */
+.kids-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.kid-row{display:flex;align-items:center;gap:8px;background:var(--inp);border-radius:8px;padding:7px 10px;margin-bottom:6px;border:1px solid rgba(99,110,150,0.07)}
+.kid-row span{font-size:16px}
+.kid-row input{width:55px;padding:4px 6px;border-radius:5px;font-size:12px;background:rgba(13,18,32,0.8);color:var(--t1);border:1px solid rgba(99,110,150,0.1);outline:none;font-family:inherit}
+.kid-row .kid-lbl{font-size:10px;color:var(--t3);flex:1}
+.kid-row button{background:rgba(255,107,107,0.1);color:var(--red);border:1px solid rgba(255,107,107,0.2);border-radius:5px;padding:3px 8px;cursor:pointer;font-size:11px;font-family:inherit}
+
+/* CALC BUTTON */
+.calc-btn{width:100%;padding:16px;border-radius:14px;font-size:16px;font-weight:800;border:none;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--acc),#8b7cf6);color:#fff;box-shadow:0 4px 20px rgba(108,92,231,0.35);transition:all .2s;margin-bottom:14px}
+.calc-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(108,92,231,0.45)}
+.calc-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.add-kid-btn{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:600;border:1px solid var(--brd);background:rgba(99,110,150,0.08);color:var(--t2);cursor:pointer;font-family:inherit}
+
+/* RESULT */
+.result{display:none;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.result-card{border-radius:20px;padding:28px;text-align:center;margin-bottom:14px;position:relative;overflow:hidden}
+.result-card::before{content:'';position:absolute;inset:0;opacity:.06;background:radial-gradient(circle at 50% 0%,#fff,transparent 70%)}
+.result-score{font-size:72px;font-weight:900;line-height:1;margin-bottom:4px}
+.result-max{font-size:18px;font-weight:400;opacity:.5}
+.result-emoji{font-size:40px;margin:8px 0}
+.result-level{font-size:22px;font-weight:800;margin-bottom:6px}
+.result-desc{font-size:13px;opacity:.8;margin-bottom:18px}
+.result-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px}
+.result-tag{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(255,255,255,0.1)}
+.share-btn{padding:12px 24px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:inherit;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.share-btn:hover{background:rgba(255,255,255,0.25)}
+.share-copied{font-size:11px;color:rgba(255,255,255,0.6);margin-top:8px;height:16px}
+
+/* AGAIN BUTTON */
+.again-btn{width:100%;padding:12px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid var(--brd);background:rgba(99,110,150,0.08);color:var(--t2);cursor:pointer;font-family:inherit;margin-bottom:14px;transition:all .2s}
+.again-btn:hover{background:rgba(99,110,150,0.15);color:var(--t1)}
+
+/* FOOTER */
 .footer{text-align:center;padding:8px 16px 16px;margin-top:8px}
 .footer-tools{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:8px}
 .footer-ver{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
 .footer-ver-text{font-size:0.65rem;color:var(--t3);opacity:0.7}
 .footer-ver-status{font-size:0.65rem;color:var(--t3)}
-.footer-export{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
-.footer-import-lbl{cursor:pointer}
+.b{padding:7px 14px;border-radius:9px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:5px}
+.bg{background:rgba(99,110,150,0.1);color:var(--t2);border:1px solid var(--brd)}
+.bs{padding:4px 9px;font-size:10px;border-radius:7px}
 .footer-credit{font-size:0.6rem;color:var(--t3);margin-top:4px;opacity:0.6}
 .footer-credit-link{color:#7eb8f7;text-decoration:none}
 .footer-credit-link:hover{text-decoration:underline}
-@media(max-width:600px){.hdr{padding:12px 14px}.ct{padding:14px 10px}.sts{grid-template-columns:1fr 1fr}.dg{grid-template-columns:1fr 1fr}.ec{flex-wrap:wrap}.eb{display:none}}
+
+@media(max-width:480px){.hero h1{font-size:22px}.result-score{font-size:56px}.wrap{padding:14px 10px 32px}}
 </style>
 </head>
 <body>
-<div class="app" id="app"></div>
-<script>
-const API="https://api.tzevaadom.co.il/alerts-history";
-const VERSION="1.0.0";
-const R={"עוטף עזה":["שדרות","נתיבות","אופקים","ניר עוז","כרם שלום","בארי","רעים","סעד","כיסופים","יד מרדכי"],"דרום":["אשקלון","אשדוד","באר שבע","קריית גת","ערד","דימונה","ירוחם","מצפה רמון","אילת"],"שפלה":["קריית מלאכי","גדרה","רחובות","נס ציונה","ראשון לציון","בית שמש","יבנה"],"מרכז":["תל אביב","רמת גן","בני ברק","חולון","בת ים","פתח תקווה","רמלה","לוד","מודיעין"],"השרון":["נתניה","הרצליה","רעננה","כפר סבא","הוד השרון","רמת השרון"],"שומרון":["אריאל","קדומים","קרני שומרון","אלקנה","ברקן","רבבה","יצהר","איתמר","עלי","שילה","בית אל","עפרה"],"צפון":["חיפה","עכו","נהריה","כרמיאל","צפת","טבריה","עפולה","מגדל העמק","קריית שמונה","מטולה","שלומי"],"ירושלים":["ירושלים","מעלה אדומים","גבעת זאב","אפרת","גוש עציון"],"יהודה":["חברון","קריית ארבע","ביתר עילית"]};
-const AF={baby:{l:"0-2 תינוק",f:2.0,e:"👶"},toddler:{l:"3-5 פעוט",f:1.7,e:"🧒"},child:{l:"6-12 ילד",f:1.3,e:"👦"},teen:{l:"13-17 נער",f:0.8,e:"🧑"}};
-const CF={none:{l:"מהבית",f:0,e:"🏠"},short:{l:"עד 30 דק׳",f:0.5,e:"🚗"},medium:{l:"30-60 דק׳",f:1.0,e:"🚙"},long:{l:"60-90 דק׳",f:1.5,e:"🚐"},extreme:{l:"90+ דק׳",f:2.0,e:"😩"}};
-const LV=[{m:15,l:"יציב",c:"#51cf66",e:"😊",d:"מתפקד כרגיל"},{m:30,l:"לחץ קל",c:"#94d82d",e:"😐",d:"מומלץ לוודא שהכל בסדר"},{m:50,l:"לחץ בינוני",c:"#ffd43b",e:"😟",d:"מומלץ גמישות בשעות ועבודה מהבית"},{m:70,l:"לחץ גבוה",c:"#ffa94d",e:"😰",d:"נדרשת שיחה אישית והקלות בעומס"},{m:100,l:"מצוקה",c:"#ff6b6b",e:"🆘",d:"חופשה, עבודה מהבית, הפניה לרווחה"}];
-const RC={low:["✅ חיזוקים ותקשורת פתוחה","✅ וודא שהעובד מרגיש גב"],med:["⚡ גמישות בשעות","⚡ עבודה מהבית","⚡ הקלה במשימות","⚡ שאל ישירות — ״איך אעזור?״"],high:["🔴 שיחה אישית דחופה","🔴 הצע ימי חופש","🔴 הפנה לרווחה/EAP","🔴 הקל בעומס מיד","🔴 סיוע עם ילדים/לוגיסטיקה","🔴 שקול הסעה מאורגנת"]};
+<div class="wrap">
 
-let S={emps:JSON.parse(localStorage.getItem('mt_e')||'[]'),al:[],aR:{},api:"idle",ld:false,dy:7,sr:"",so:"stress",sa:false,eid:null,sel:null,fn:"",fc:"",fs:"single",fk:[],fp:false,fcm:"short",fe:false,fx:false,fcs:false};
-const sv=()=>localStorage.setItem('mt_e',JSON.stringify(S.emps));
-let ac=[...new Set(Object.values(R).flat())].sort((a,b)=>a.localeCompare(b,'he'));
-function rg(c){for(const[r,cs]of Object.entries(R))if(cs.some(x=>c.includes(x)||x.includes(c)))return r;return null}
-function ag(a){a=+a;return a<=2?'baby':a<=5?'toddler':a<=12?'child':'teen'}
-function sc(e){const r=rg(e.city),al=r?(S.aR[r]||0):0;let s=al*2.5;if(e.ch?.length>0){const cf=e.ch.reduce((s,c)=>s+(AF[c.a]?.f||1),0),nf=1+(e.ch.length-1)*.25;s*=cf*nf*.5}if(e.pr)s+=20;s+=(CF[e.cm]?.f||0)*5;if(e.cs)s+=8;if(e.ev)s+=15;if(e.px)s+=18;return Math.min(Math.round(s),100)}
-function gl(s){return LV.find(l=>s<=l.m)||LV[LV.length-1]}
-function gr(s){return s<=25?RC.low:s<=55?RC.med:RC.high}
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-icon">🔥</span>
+  <h1>כמה אתה בלחץ<br>בגלל המצב?</h1>
+  <p>קלקולטור עומס אישי — מחשב את הלחץ האמיתי שלך<br>לפי אזעקות, ילדים, מילואים, נסיעות ועוד</p>
+  <p class="hero-sub">30 שניות • בחינם • שתף את הציון שלך</p>
+</div>
 
-function gd(){const cs=["שדרות","אשקלון","אשדוד","באר שבע","תל אביב","נתיבות","קריית שמונה","חיפה","ירושלים","אריאל","קדומים","עפרה","רעננה","מטולה","צפת"];const a=[];const n=Date.now();for(let i=0;i<7;i++){const c=Math.floor(Math.random()*8)+1;for(let j=0;j<c;j++){const ci=cs[Math.floor(Math.random()*cs.length)];a.push({alertDate:new Date(n-i*864e5-Math.random()*864e5).toISOString(),data:ci,cities:[ci]})}}return a}
-function pa(d){const rc={};const ct=Date.now()-S.dy*864e5;const allCities=new Set(Object.values(R).flat());d.forEach(a=>{(a.cities||[a.data]).forEach(c=>{if(c)allCities.add(c)});if(new Date(a.alertDate).getTime()<ct)return;(a.cities||[a.data]).forEach(c=>{if(!c)return;for(const[r,rcs]of Object.entries(R))if(rcs.some(x=>c.includes(x)||x.includes(c)))rc[r]=(rc[r]||0)+1})});S.aR=rc;ac=[...allCities].sort((a,b)=>a.localeCompare(b,'he'))}
-async function fa(){S.ld=true;rr();try{const r=await fetch(API);if(r.ok){S.al=await r.json();S.api="connected"}else throw 0}catch{S.al=gd();S.api="demo"}pa(S.al);S.ld=false;rr()}
+<!-- QUIZ FORM -->
+<div id="quizForm">
 
-function h(t,a,...ch){const el=document.createElement(t);if(a)for(const[k,v]of Object.entries(a)){if(k==='style'&&typeof v==='object')Object.assign(el.style,v);else if(k.startsWith('on'))el.addEventListener(k.slice(2).toLowerCase(),v);else if(k==='className')el.className=v;else if(k==='innerHTML')el.innerHTML=v;else el.setAttribute(k,v)}ch.flat(Infinity).forEach(c=>{if(c==null||c===false)return;el.appendChild(typeof c==='string'||typeof c==='number'?document.createTextNode(c):c)});return el}
+  <!-- מיקום -->
+  <div class="card">
+    <div class="card-title">📍 איפה אתה גר?</div>
+    <div class="fg">
+      <input class="fi" id="cityInp" placeholder="הקלד עיר / יישוב..." list="cityList" autocomplete="off">
+      <datalist id="cityList"></datalist>
+      <div class="fh" id="cityHint"></div>
+    </div>
+  </div>
 
-function rr(){
-const app=document.getElementById('app');app.innerHTML='';
-// HEADER
-app.appendChild(h('header',{className:'hdr'},h('div',{className:'logo'},h('div',{className:'logo-i'},'📋'),h('div',null,h('h1',null,'מצב הצוות'),h('p',null,'כלי ניהולי לרווחת עובדים • פיקוד העורף + מדדים אישיים'))),h('div',{className:'ha'},h('span',{className:`bdg ${S.api==='connected'?'bdg-g':'bdg-y'}`},S.api==='connected'?'🟢 API מחובר':S.api==='demo'?'🟡 הדגמה':'⏳'),h('button',{className:'b bg bs',onClick:fa},'🔄 רענן'))));
+  <!-- משפחה -->
+  <div class="card">
+    <div class="card-title">👨‍👩‍👧‍👦 מצב משפחתי</div>
+    <div class="fg">
+      <label class="fl">סטטוס</label>
+      <select class="sel" id="familySel" onchange="onFamilyChange()">
+        <option value="single">רווק/ה</option>
+        <option value="couple">זוגיות (ללא ילדים)</option>
+        <option value="parent">הורה</option>
+      </select>
+    </div>
+    <div id="partnerRow" style="display:none">
+      <div class="trow">
+        <label class="trow-l">🪖 בן/בת זוג במילואים<span class="trow-sub">מוסיף עומס משמעותי</span></label>
+        <button class="tog" id="partnerTog" onclick="toggle('partner')"></button>
+      </div>
+    </div>
+    <div id="kidsSection" style="display:none">
+      <div class="kids-header">
+        <span style="font-size:11px;color:var(--t3)">ילדים וגילאים</span>
+        <button class="add-kid-btn" onclick="addKid()">+ ילד</button>
+      </div>
+      <div id="kidsList"></div>
+    </div>
+  </div>
 
-const ct=h('div',{className:'ct'});
+  <!-- מצב המלחמה -->
+  <div class="card">
+    <div class="card-title">🛡️ השפעת המצב עליך</div>
+    <div class="trow">
+      <label class="trow-l">🏚️ מפונה מהבית<span class="trow-sub">חיים בחוסר ודאות</span></label>
+      <button class="tog" id="evacTog" onclick="toggle('evac')"></button>
+    </div>
+    <div class="trow">
+      <label class="trow-l">💔 קרבה לאירוע<span class="trow-sub">נפגעים, חטוף, אובדן קרוב</span></label>
+      <button class="tog" id="proxTog" onclick="toggle('prox')"></button>
+    </div>
+  </div>
 
-// STATS
-const avg=S.emps.length?Math.round(S.emps.reduce((s,e)=>s+sc(e),0)/S.emps.length):0;
-const hi=S.emps.filter(e=>sc(e)>50).length;
-const tot=Object.values(S.aR).reduce((s,v)=>s+v,0);
-const res=S.emps.filter(e=>e.pr).length;
-const evac=S.emps.filter(e=>e.ev).length;
-const sg=h('div',{className:'sts'});
-[{l:"עובדים",v:S.emps.length,i:"👥",c:"var(--blu)"},{l:`התרעות (${S.dy} ימים)`,v:tot,i:"🚨",c:"var(--red)"},{l:"ציון ממוצע",v:avg,i:"📊",c:gl(avg).c},{l:"בלחץ גבוה",v:hi,i:"⚠️",c:"var(--ora)"},{l:"זוג במיל׳",v:res,i:"🪖",c:"var(--pur)"},{l:"מפונים",v:evac,i:"🏚️",c:"var(--yel)"}].forEach(s=>sg.appendChild(h('div',{className:'st'},h('div',{className:'st-i'},s.i),h('div',null,h('div',{className:'st-v',style:{color:s.c}},String(s.v)),h('div',{className:'st-l'},s.l)))));
-ct.appendChild(sg);
+  <!-- נסיעה -->
+  <div class="card">
+    <div class="card-title">🚗 נסיעה לעבודה</div>
+    <div class="fg">
+      <label class="fl">זמן נסיעה רגיל</label>
+      <select class="sel" id="commuteSel">
+        <option value="none">🏠 עובד מהבית</option>
+        <option value="short" selected>🚗 עד 30 דקות</option>
+        <option value="medium">🚙 30–60 דקות</option>
+        <option value="long">🚐 60–90 דקות</option>
+        <option value="extreme">😩 90 דקות +</option>
+      </select>
+    </div>
+    <div class="trow" style="border:none;padding-top:0">
+      <label class="trow-l">🚧 פקקים חמורים בגלל המצב</label>
+      <button class="tog" id="trafficTog" onclick="toggle('traffic')"></button>
+    </div>
+  </div>
 
-// CONTROLS
-const cr=h('div',{className:'ctr'});
-cr.appendChild(h('button',{className:'b bp',onClick:()=>{S.sa=true;S.eid=null;rf();rr()}},'➕ הוסף עובד'));
-const si=h('input',{className:'inp',placeholder:'🔍 חיפוש...',value:S.sr});si.addEventListener('input',e=>{S.sr=e.target.value;rr()});cr.appendChild(si);
-const ds=h('select',{className:'sel'});[{v:1,l:"יום"},{v:3,l:"3 ימים"},{v:7,l:"שבוע"},{v:14,l:"שבועיים"},{v:30,l:"חודש"}].forEach(o=>{const op=h('option',{value:o.v},o.l);if(o.v===S.dy)op.selected=true;ds.appendChild(op)});ds.addEventListener('change',e=>{S.dy=+e.target.value;pa(S.al);rr()});cr.appendChild(ds);
-const ss=h('select',{className:'sel'});[{v:"stress",l:"מיון: עומס"},{v:"name",l:"מיון: שם"}].forEach(o=>{const op=h('option',{value:o.v},o.l);if(o.v===S.so)op.selected=true;ss.appendChild(op)});ss.addEventListener('change',e=>{S.so=e.target.value;rr()});cr.appendChild(ss);
-ct.appendChild(cr);
+  <button class="calc-btn" onclick="calculate()">🔥 חשב את הציון שלי</button>
+</div>
 
-// REGION MAP
-if(Object.keys(S.aR).length>0){
-  const rm=h('div',{className:'rm'});rm.appendChild(h('h3',null,`🗺️ התרעות לפי אזור (${S.dy} ימים)`));
-  const chs=h('div',{className:'chs'});
-  Object.keys(R).forEach(r=>{const c=S.aR[r]||0;const i=Math.min(c/20,1);const has=S.emps.some(e=>rg(e.city)===r);const bg=c>0?`rgba(255,107,107,${.05+i*.3})`:'rgba(99,110,150,0.05)';const bd=c>0?`rgba(255,107,107,${.15+i*.4})`:'rgba(99,110,150,0.1)';const nc=c>0?'#fca5a5':'var(--t3)';const vc=c>10?'var(--red)':c>5?'var(--ora)':c>0?'var(--yel)':'#2a3050';
-  const ch=h('div',{className:'ch',style:{background:bg,border:`1px solid ${bd}`}},h('span',{className:'ch-n',style:{color:nc}},r),h('span',{className:'ch-c',style:{color:vc}},String(c)));if(has)ch.appendChild(h('div',{className:'ch-d'}));chs.appendChild(ch)});
-  rm.appendChild(chs);ct.appendChild(rm);
-}
+<!-- RESULT -->
+<div class="result" id="result">
+  <div class="result-card" id="resultCard">
+    <div class="result-score" id="resultScore"></div>
+    <div class="result-emoji" id="resultEmoji"></div>
+    <div class="result-level" id="resultLevel"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="result-tags" id="resultTags"></div>
+    <button class="share-btn" onclick="shareResult()">📤 שתף את הציון שלי</button>
+    <div class="share-copied" id="shareCopied"></div>
+  </div>
+  <button class="again-btn" onclick="resetForm()">🔄 חשב שוב</button>
+</div>
 
-// EMPLOYEE LIST
-if(S.emps.length===0){ct.appendChild(h('div',{className:'ey'},h('div',{className:'ic'},'👥'),h('h3',null,'אין עובדים עדיין'),h('p',null,'הוסף עובדים כדי לראות את מדד העומס שלהם'),h('button',{className:'b bp',onClick:()=>{S.sa=true;rr()}},'➕ הוסף עובד')))}
-else{
-  const el=h('div',{className:'el'});
-  S.emps.filter(e=>e.name.includes(S.sr)||e.city.includes(S.sr)).sort((a,b)=>S.so==='stress'?sc(b)-sc(a):a.name.localeCompare(b.name,'he')).forEach(emp=>{
-    const s=sc(emp),lv=gl(s),r=rg(emp.city),ra=r?(S.aR[r]||0):0;
-    const tags=[];
-    if(emp.ch?.length>0)tags.push({t:`👶 ${emp.ch.length} ילדים`,c:'var(--blu)'});
-    if(emp.pr)tags.push({t:'🪖 זוג במיל׳',c:'var(--pur)'});
-    if(emp.ev)tags.push({t:'🏚️ מפונה',c:'var(--yel)'});
-    if(emp.px)tags.push({t:'💔 קרבה לאירוע',c:'var(--red)'});
-    if(emp.cs)tags.push({t:'🚧 פקקים',c:'var(--ora)'});
-    const card=h('div',{className:'ec',onClick:()=>{S.sel=emp;rr()}},
-      h('div',{className:'br',style:{background:lv.c}}),
-      h('div',{className:'ee',style:{background:lv.c+'15',border:`1px solid ${lv.c}33`}},lv.e),
-      h('div',{className:'ei'},h('div',{className:'en'},emp.name),h('div',{className:'em'},h('span',null,`📍 ${emp.city}`),h('span',null,`🚨 ${ra}`),h('span',null,CF[emp.cm]?.e+' '+CF[emp.cm]?.l)),tags.length>0?h('div',{className:'tg'},...tags.map(t=>h('span',{className:'tgi',style:{background:t.c+'18',color:t.c,border:`1px solid ${t.c}33`}},t.t))):null),
-      h('div',{className:'es'},h('div',{className:'esn',style:{color:lv.c}},String(s)),h('div',{className:'esl',style:{color:lv.c}},lv.l)),
-      h('div',{className:'eb'},h('div',{className:'ebb'},h('div',{className:'ebf',style:{width:s+'%',background:lv.c}}))),
-      h('div',{className:'ea'},h('button',{className:'b bg bs',onClick:e=>{e.stopPropagation();ee(emp)}},'✏️'),h('button',{className:'b bd bs',onClick:e=>{e.stopPropagation();de(emp.id)}},'🗑️'))
-    );el.appendChild(card)});
-  ct.appendChild(el);
-}
-
-// FORMULA
-ct.appendChild(h('div',{className:'fm'},h('h3',null,'📐 חישוב מדד העומס'),h('div',{className:'txt',innerHTML:`<strong class="hl">בסיס:</strong> התרעות × 2.5<br><strong>ילדים:</strong> תינוק ×2.0 | פעוט ×1.7 | ילד ×1.3 | נער ×0.8<br><strong>זוג במילואים:</strong> +20 | <strong>מפונה:</strong> +15 | <strong>קרבה לאירוע:</strong> +18<br><strong>נסיעה:</strong> 30 דק׳ +2.5 | 60 דק׳ +5 | 90+ דק׳ +10 | <strong>פקקים:</strong> +8`})));
-ct.appendChild(h('div',{className:'ft',innerHTML:'📋 מצב הצוות • כלי ניהולי לרווחת עובדים במלחמה ומתח ביטחוני<br>נבנה עם ❤️ למנהלים שאכפת להם'}));
-app.appendChild(ct);
-
-// MODALS
-if(S.sa)app.appendChild(ram());
-if(S.sel)app.appendChild(rdm());
-}
-
-function rf(){S.fn="";S.fc="";S.fs="single";S.fk=[];S.fp=false;S.fcm="short";S.fe=false;S.fx=false;S.fcs=false}
-function ee(e){S.fn=e.name;S.fc=e.city;S.fs=e.ch?.length>0?'parent':'single';S.fk=(e.ch||[]).map(c=>({...c}));S.fp=e.pr||false;S.fcm=e.cm||'short';S.fe=e.ev||false;S.fx=e.px||false;S.fcs=e.cs||false;S.eid=e.id;S.sa=true;rr()}
-function de(id){S.emps=S.emps.filter(e=>e.id!==id);if(S.sel?.id===id)S.sel=null;sv();rr()}
-
-function ram(){
-  const ov=h('div',{className:'mo',onClick:()=>{S.sa=false;S.eid=null;rr()}});
-  const m=h('div',{className:'ml',onClick:e=>e.stopPropagation()});
-  m.appendChild(h('h2',null,S.eid?'✏️ עריכת עובד':'➕ הוספת עובד'));
-
-  // Name
-  let fg=h('div',{className:'fg'});fg.appendChild(h('label',{className:'fl'},'שם'));
-  const ni=h('input',{className:'fi',placeholder:'ישראל ישראלי',value:S.fn});ni.addEventListener('input',e=>S.fn=e.target.value);fg.appendChild(ni);m.appendChild(fg);
-
-  // City
-  fg=h('div',{className:'fg'});fg.appendChild(h('label',{className:'fl'},'יישוב'));
-  const ci=h('input',{className:'fi',placeholder:'הקלד יישוב...',value:S.fc,list:'cl'});
-  const cityHint=h('div',{className:'fh'});
-  const updHint=()=>{const r=rg(S.fc);cityHint.textContent=r?`📍 ${r} • ${S.aR[r]||0} התרעות`:''};
-  updHint();
-  ci.addEventListener('input',e=>{S.fc=e.target.value;updHint()});
-  fg.appendChild(ci);
-  const dtl=h('datalist',{id:'cl'});ac.forEach(c=>dtl.appendChild(h('option',{value:c})));fg.appendChild(dtl);
-  fg.appendChild(cityHint);m.appendChild(fg);
-
-  // Family
-  m.appendChild(h('div',{className:'st0'},'👨‍👩‍👧‍👦 מצב משפחתי'));
-  fg=h('div',{className:'fg'});fg.appendChild(h('label',{className:'fl'},'סטטוס'));
-  const st=h('select',{className:'fi'});[{v:'single',l:'רווק/ה'},{v:'couple',l:'זוגיות (ללא ילדים)'},{v:'parent',l:'הורה'}].forEach(o=>{const op=h('option',{value:o.v},o.l);if(o.v===S.fs)op.selected=true;st.appendChild(op)});
-  st.addEventListener('change',e=>{S.fs=e.target.value;if(e.target.value!=='parent')S.fk=[];rr()});fg.appendChild(st);m.appendChild(fg);
-
-  if(S.fs!=='single'){const tr=h('div',{className:'tr'});tr.appendChild(h('span',{className:'trl'},'🪖 בן/בת זוג במילואים'));tr.appendChild(h('button',{className:`to ${S.fp?'on':''}`,onClick:()=>{S.fp=!S.fp;rr()}}));m.appendChild(tr)}
-
-  if(S.fs==='parent'){
-    const kh=h('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'center',margin:'8px 0'}});
-    kh.appendChild(h('label',{className:'fl',style:{margin:0}},`ילדים (${S.fk.length})`));
-    kh.appendChild(h('button',{className:'b bg bs',onClick:()=>{S.fk.push({a:'child',age:7});rr()}},'+ ילד'));m.appendChild(kh);
-    S.fk.forEach((k,i)=>{const row=h('div',{className:'fr'});row.appendChild(h('span',{className:'fre'},AF[k.a]?.e||'👦'));row.appendChild(h('span',null,'גיל: '));
-    const ai=h('input',{type:'number',min:'0',max:'17',value:String(k.age)});ai.addEventListener('change',e=>{S.fk[i].age=+e.target.value||0;S.fk[i].a=ag(e.target.value);rr()});row.appendChild(ai);
-    row.appendChild(h('span',{className:'frl'},AF[k.a]?.l||''));row.appendChild(h('button',{className:'b bd bs',onClick:()=>{S.fk.splice(i,1);rr()}},'×'));m.appendChild(row)});
-  }
-
-  // Logistics
-  m.appendChild(h('div',{className:'st0'},'🚗 נסיעה'));
-  fg=h('div',{className:'fg'});fg.appendChild(h('label',{className:'fl'},'זמן נסיעה'));
-  const cs=h('select',{className:'fi'});Object.entries(CF).forEach(([k,v])=>{const op=h('option',{value:k},v.e+' '+v.l);if(k===S.fcm)op.selected=true;cs.appendChild(op)});cs.addEventListener('change',e=>{S.fcm=e.target.value;rr()});fg.appendChild(cs);m.appendChild(fg);
-  let tr=h('div',{className:'tr'});tr.appendChild(h('span',{className:'trl'},'🚧 פקקים/חסימות מהמצב'));tr.appendChild(h('button',{className:`to ${S.fcs?'on':''}`,onClick:()=>{S.fcs=!S.fcs;rr()}}));m.appendChild(tr);
-
-  // War impact
-  m.appendChild(h('div',{className:'st0'},'🛡️ השפעת המצב'));
-  tr=h('div',{className:'tr'});tr.appendChild(h('span',{className:'trl'},'🏚️ מפונה'));tr.appendChild(h('button',{className:`to ${S.fe?'on':''}`,onClick:()=>{S.fe=!S.fe;rr()}}));m.appendChild(tr);
-  tr=h('div',{className:'tr'});tr.appendChild(h('span',{className:'trl'},'💔 קרבה לאירוע (נפגעים/חטוף)'));tr.appendChild(h('button',{className:`to ${S.fx?'on':''}`,onClick:()=>{S.fx=!S.fx;rr()}}));m.appendChild(tr);
-
-  // Save
-  const acts=h('div',{className:'fa'});const ok=S.fn.trim()&&S.fc.trim();
-  acts.appendChild(h('button',{className:`b ${ok?'bok':'bg'}`,style:ok?{}:{opacity:'.5',cursor:'not-allowed'},onClick:()=>{if(!ok)return;
-    const e={id:S.eid||Date.now(),name:S.fn.trim(),city:S.fc.trim(),ch:S.fs==='parent'?S.fk.map(k=>({...k})):[],pr:S.fp,cm:S.fcm,ev:S.fe,px:S.fx,cs:S.fcs};
-    if(S.eid)S.emps=S.emps.map(x=>x.id===S.eid?e:x);else S.emps.push(e);sv();S.sa=false;S.eid=null;rf();rr()}},S.eid?'💾 שמור':'✅ הוסף'));
-  acts.appendChild(h('button',{className:'b bg',onClick:()=>{S.sa=false;S.eid=null;rr()}},'ביטול'));m.appendChild(acts);
-  ov.appendChild(m);return ov;
-}
-
-function rdm(){
-  const e=S.sel,s=sc(e),lv=gl(s),r=rg(e.city),ra=r?(S.aR[r]||0):0,recs=gr(s);
-  const ov=h('div',{className:'mo',onClick:()=>{S.sel=null;rr()}});
-  const m=h('div',{className:'ml',onClick:ev=>ev.stopPropagation()});
-
-  const hd=h('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:'14px'}});
-  hd.appendChild(h('div',null,h('h2',{style:{marginBottom:'3px'}},e.name),h('p',{style:{fontSize:'11px',color:'var(--t3)'}},`📍 ${e.city}${r?` • ${r}`:''}`)));
-  hd.appendChild(h('div',{className:'ee',style:{width:'52px',height:'52px',fontSize:'26px',background:lv.c+'22',border:`2px solid ${lv.c}55`}},lv.e));m.appendChild(hd);
-
-  const gu=h('div',{className:'gu'});const gt=h('div',{className:'gut'});gt.appendChild(h('span',{style:{fontSize:'12px',fontWeight:'700',color:lv.c}},lv.l));gt.appendChild(h('span',{style:{fontSize:'22px',fontWeight:'900',color:lv.c}},String(s)));gu.appendChild(gt);
-  gu.appendChild(h('div',{className:'gub'},h('div',{className:'guf',style:{width:s+'%'}})));gu.appendChild(h('p',{style:{fontSize:'10px',color:'var(--t3)',marginTop:'4px'}},lv.d));m.appendChild(gu);
-
-  const dg=h('div',{className:'dg'});
-  dg.appendChild(h('div',{className:'db'},h('div',{className:'dbl'},'🚨 התרעות'),h('div',{className:'dbv',style:{color:'var(--red)'}},String(ra)),h('div',{className:'dbs'},`${S.dy} ימים`)));
-  dg.appendChild(h('div',{className:'db'},h('div',{className:'dbl'},'👶 ילדים'),h('div',{className:'dbv',style:{color:'var(--blu)'}},String(e.ch?.length||0)),h('div',{className:'dbs'},e.ch?.map(c=>AF[c.a]?.e).join(' ')||'—')));
-  dg.appendChild(h('div',{className:'db'},h('div',{className:'dbl'},'🚗 נסיעה'),h('div',{className:'dbv',style:{color:'var(--ora)',fontSize:'13px'}},CF[e.cm]?.l||'—'),h('div',{className:'dbs'},e.cs?'🚧 פקקים':'רגיל')));
-  dg.appendChild(h('div',{className:'db'},h('div',{className:'dbl'},'מצב מיוחד'),h('div',{className:'dbv',style:{fontSize:'13px',color:'var(--pur)'}},
-    [e.pr?'🪖 מיל׳':null,e.ev?'🏚️ מפונה':null,e.px?'💔 קרבה':null].filter(Boolean).join(' ')||'—')));
-  m.appendChild(dg);
-
-  const rc=h('div',{className:'rc',style:{background:lv.c+'11',border:`1px solid ${lv.c}33`}});
-  rc.appendChild(h('div',{className:'rct',style:{color:lv.c}},'💡 המלצות'));recs.forEach(r=>rc.appendChild(h('div',{className:'rci'},r)));m.appendChild(rc);
-  m.appendChild(h('button',{className:'b bg',style:{width:'100%',justifyContent:'center',padding:'10px'},onClick:()=>{S.sel=null;rr()}},'סגור'));
-  ov.appendChild(m);return ov;
-}
-
-function cmpV(a,b){const pa=a.split('.').map(Number),pb=b.split('.').map(Number);for(let i=0;i<Math.max(pa.length,pb.length);i++){const d=(pa[i]||0)-(pb[i]||0);if(d!==0)return d}return 0}
-async function checkVersion(){const el=document.getElementById('ver-status');if(!el)return;el.textContent='⏳ בודק...';try{const r=await fetch('./index.html?_='+Date.now(),{cache:'no-store'});const txt=await r.text();const m=txt.match(/const VERSION\s*=\s*["']([^"']+)['"]/);if(!m){el.textContent='❓ לא ניתן לבדוק';return}const lv=m[1];if(cmpV(lv,VERSION)>0){el.innerHTML=`🆕 גרסה ${lv} זמינה — <a href="javascript:location.reload(true)" style="color:var(--blu)">רענן לעדכון</a>`}else{el.textContent=`✅ הגרסה עדכנית`}}catch{el.textContent='❌ שגיאה בבדיקה'}}
-function dl(content,filename,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=filename;a.click();URL.revokeObjectURL(a.href)}
-function exportJSON(){dl(JSON.stringify(S.emps,null,2),`matzav-team-backup-${new Date().toISOString().slice(0,10)}.json`,'application/json')}
-function exportCSV(){const hdr=['שם','עיר','אזור','ציון לחץ','רמת לחץ','מספר ילדים','זוג במילואים','מפונה','קרבה לאירוע','זמן נסיעה','פקקים'];const rows=S.emps.map(e=>{const s=sc(e),lv=gl(s),r=rg(e.city);return[e.name,e.city,r||'',s,lv.l,e.ch?.length||0,e.pr?'כן':'לא',e.ev?'כן':'לא',e.px?'כן':'לא',CF[e.cm]?.l||'',e.cs?'כן':'לא']});const csv='\uFEFF'+[hdr,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');dl(csv,`matzav-team-${new Date().toISOString().slice(0,10)}.csv`,'text/csv;charset=utf-8')}
-function importJSON(file){if(!file)return;const reader=new FileReader();reader.onload=e=>{try{const data=JSON.parse(e.target.result);if(Array.isArray(data)){S.emps=data;sv();rr()}}catch{alert('קובץ לא תקין')}};reader.readAsText(file)}
-
-fa();
-</script>
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-tools">
     <div class="footer-ver">
-      <span class="footer-ver-text">v1.0.0</span>
+      <span class="footer-ver-text">v2.0.0</span>
       <button class="b bg bs" onclick="checkVersion()">🔍 בדוק עדכונים</button>
       <span id="ver-status" class="footer-ver-status"></span>
-    </div>
-    <div class="footer-export">
-      <button class="b bg bs" onclick="exportJSON()">💾 גיבוי JSON</button>
-      <button class="b bg bs" onclick="exportCSV()">📊 ייצוא Excel</button>
-      <label class="b bg bs footer-import-lbl">📤 ייבוא JSON<input type="file" accept=".json" style="display:none" onchange="importJSON(this.files[0]);this.value=''"></label>
     </div>
     <a href="https://buymeacoffee.com/uriel.zion" target="_blank" rel="noopener noreferrer" class="b bg bs" style="text-decoration:none">♥ אהבתם? מוזמנים לתמוך</a>
   </div>
@@ -306,5 +207,141 @@ fa();
     Developed by <a href="https://www.linkedin.com/in/urielzion" target="_blank" rel="noopener noreferrer" class="footer-credit-link">Uriel Zion</a>
   </p>
 </footer>
+
+</div><!-- /wrap -->
+
+<script>
+const VERSION="2.0.0";
+const API="https://api.tzevaadom.co.il/alerts-history";
+const R={"עוטף עזה":["שדרות","נתיבות","אופקים","ניר עוז","כרם שלום","בארי","רעים","סעד","כיסופים","יד מרדכי"],"דרום":["אשקלון","אשדוד","באר שבע","קריית גת","ערד","דימונה","ירוחם","מצפה רמון","אילת"],"שפלה":["קריית מלאכי","גדרה","רחובות","נס ציונה","ראשון לציון","בית שמש","יבנה"],"מרכז":["תל אביב","רמת גן","בני ברק","חולון","בת ים","פתח תקווה","רמלה","לוד","מודיעין"],"השרון":["נתניה","הרצליה","רעננה","כפר סבא","הוד השרון","רמת השרון"],"שומרון":["אריאל","קדומים","קרני שומרון","אלקנה","ברקן","רבבה","יצהר","איתמר","עלי","שילה","בית אל","עפרה"],"צפון":["חיפה","עכו","נהריה","כרמיאל","צפת","טבריה","עפולה","מגדל העמק","קריית שמונה","מטולה","שלומי"],"ירושלים":["ירושלים","מעלה אדומים","גבעת זאב","אפרת","גוש עציון"],"יהודה":["חברון","קריית ארבע","ביתר עילית"]};
+const AF={baby:{l:"תינוק",f:2.0,e:"👶"},toddler:{l:"פעוט",f:1.7,e:"🧒"},child:{l:"ילד",f:1.3,e:"👦"},teen:{l:"נער",f:0.8,e:"🧑"}};
+const CF={none:{l:"מהבית",f:0},short:{l:"עד 30 דק׳",f:0.5},medium:{l:"30–60 דק׳",f:1.0},long:{l:"60–90 דק׳",f:1.5},extreme:{l:"90+ דק׳",f:2.0}};
+const LV=[{m:15,l:"יציב",c:"#51cf66",e:"😊",d:"מתפקד כרגיל — עם כל הכובד של התקופה"},{m:30,l:"לחץ קל",c:"#94d82d",e:"😐",d:"יש לחץ ברקע, אבל מסתדר"},{m:50,l:"לחץ בינוני",c:"#ffd43b",e:"😟",d:"זה מורגש — מגיע לך גמישות ותמיכה"},{m:70,l:"לחץ גבוה",c:"#ffa94d",e:"😰",d:"עומס כבד — חשוב לדבר עם מישהו"},{m:100,l:"מצוקה",c:"#ff6b6b",e:"🆘",d:"מצב קשה מאוד — אל תישאר עם זה לבד"}];
+
+let aR={},kids=[],toggles={partner:false,evac:false,prox:false,traffic:false};
+let ac=[...new Set(Object.values(R).flat())].sort((a,b)=>a.localeCompare(b,'he'));
+
+function rg(c){for(const[r,cs]of Object.entries(R))if(cs.some(x=>c.includes(x)||x.includes(c)))return r;return null}
+function ag(a){a=+a;return a<=2?'baby':a<=5?'toddler':a<=12?'child':'teen'}
+function gl(s){return LV.find(l=>s<=l.m)||LV[LV.length-1]}
+
+function toggle(k){toggles[k]=!toggles[k];document.getElementById(k+'Tog').classList.toggle('on',toggles[k])}
+
+function onFamilyChange(){
+  const v=document.getElementById('familySel').value;
+  document.getElementById('partnerRow').style.display=v==='single'?'none':'block';
+  document.getElementById('kidsSection').style.display=v==='parent'?'block':'none';
+  if(v!=='parent'){kids=[];renderKids()}
+}
+
+function addKid(){kids.push({age:7,a:'child'});renderKids()}
+function removeKid(i){kids.splice(i,1);renderKids()}
+function renderKids(){
+  const el=document.getElementById('kidsList');el.innerHTML='';
+  kids.forEach((k,i)=>{
+    const row=document.createElement('div');row.className='kid-row';
+    row.innerHTML=`<span>${AF[k.a]?.e||'👦'}</span><span>גיל:</span><input type="number" min="0" max="17" value="${k.age}" onchange="kids[${i}].age=+this.value;kids[${i}].a=ag(this.value);renderKids()"><span class="kid-lbl">${AF[k.a]?.l||''}</span><button onclick="removeKid(${i})">×</button>`;
+    el.appendChild(row);
+  });
+}
+
+function calcScore(city,family,ks,partner,evac,prox,commute,traffic){
+  const r=rg(city),al=r?(aR[r]||0):0;
+  let s=al*2.5;
+  if(ks.length>0){const cf=ks.reduce((t,c)=>t+(AF[c.a]?.f||1),0),nf=1+(ks.length-1)*.25;s*=cf*nf*.5}
+  if(partner)s+=20;
+  s+=(CF[commute]?.f||0)*5;
+  if(traffic)s+=8;
+  if(evac)s+=15;
+  if(prox)s+=18;
+  return Math.min(Math.round(s),100);
+}
+
+function calculate(){
+  const city=document.getElementById('cityInp').value.trim();
+  const family=document.getElementById('familySel').value;
+  const commute=document.getElementById('commuteSel').value;
+  const score=calcScore(city,family,kids,toggles.partner,toggles.evac,toggles.prox,commute,toggles.traffic);
+  showResult(score,city,family,commute);
+}
+
+function showResult(score,city,family,commute){
+  const lv=gl(score);
+  document.getElementById('quizForm').style.display='none';
+  const res=document.getElementById('result');res.style.display='block';
+  const card=document.getElementById('resultCard');
+  card.style.background=`linear-gradient(135deg,${lv.c}22,${lv.c}11)`;
+  card.style.border=`1px solid ${lv.c}44`;
+  document.getElementById('resultScore').innerHTML=`<span style="color:${lv.c}">${score}</span><span class="result-max">/100</span>`;
+  document.getElementById('resultEmoji').textContent=lv.e;
+  document.getElementById('resultLevel').style.color=lv.c;
+  document.getElementById('resultLevel').textContent=lv.l;
+  document.getElementById('resultDesc').textContent=lv.d;
+
+  // tags
+  const tags=[];
+  if(city){const r=rg(city);tags.push(r?`📍 ${r}`:(`📍 ${city}`))}
+  if(kids.length>0)tags.push(`👶 ${kids.length} ילדים`);
+  if(toggles.partner)tags.push('🪖 זוג במיל׳');
+  if(toggles.evac)tags.push('🏚️ מפונה');
+  if(toggles.prox)tags.push('💔 קרבה לאירוע');
+  if(commute!=='none')tags.push(`🚗 ${CF[commute]?.l}`);
+  if(toggles.traffic)tags.push('🚧 פקקים');
+  const tagsEl=document.getElementById('resultTags');tagsEl.innerHTML='';
+  tags.forEach(t=>{const s=document.createElement('span');s.className='result-tag';s.textContent=t;tagsEl.appendChild(s)});
+}
+
+function shareResult(){
+  const score=document.getElementById('resultScore').textContent.replace('/100','').trim();
+  const level=document.getElementById('resultLevel').textContent;
+  const emoji=document.getElementById('resultEmoji').textContent;
+  const text=`${emoji} ציון העומס שלי בתקופת המלחמה: ${score}/100\n🔴 רמה: ${level}\n\nמה הציון שלך? בדוק גם אתה 👇\nhttps://uriz1991.github.io/matzav-team/`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const el=document.getElementById('shareCopied');
+    el.textContent='✅ הועתק! פשוט הדבק בוואטסאפ / פייסבוק';
+    setTimeout(()=>el.textContent='',4000);
+  }).catch(()=>{
+    prompt('העתק את הטקסט:',text);
+  });
+}
+
+function resetForm(){
+  document.getElementById('result').style.display='none';
+  document.getElementById('quizForm').style.display='block';
+}
+
+// City autocomplete + hint
+const cityInp=document.getElementById('cityInp');
+const cityHint=document.getElementById('cityHint');
+cityInp.addEventListener('input',()=>{
+  const r=rg(cityInp.value);
+  cityHint.textContent=r?`📍 ${r} • ${aR[r]||0} התרעות ב-7 ימים`:'';
+});
+
+// Load alerts
+async function loadAlerts(){
+  try{
+    const resp=await fetch(API);
+    if(!resp.ok)throw 0;
+    const data=await resp.json();
+    const rc={};const allC=new Set(Object.values(R).flat());
+    const cut=Date.now()-7*864e5;
+    data.forEach(a=>{
+      (a.cities||[a.data]).forEach(c=>{if(c)allC.add(c)});
+      if(new Date(a.alertDate).getTime()<cut)return;
+      (a.cities||[a.data]).forEach(c=>{if(!c)return;for(const[r,cs]of Object.entries(R))if(cs.some(x=>c.includes(x)||x.includes(c)))rc[r]=(rc[r]||0)+1});
+    });
+    aR=rc;
+    ac=[...allC].sort((a,b)=>a.localeCompare(b,'he'));
+  }catch{/* use empty */}
+  const dl=document.getElementById('cityList');
+  ac.forEach(c=>{const o=document.createElement('option');o.value=c;dl.appendChild(o)});
+}
+
+function cmpV(a,b){const pa=a.split('.').map(Number),pb=b.split('.').map(Number);for(let i=0;i<Math.max(pa.length,pb.length);i++){const d=(pa[i]||0)-(pb[i]||0);if(d!==0)return d}return 0}
+async function checkVersion(){const el=document.getElementById('ver-status');if(!el)return;el.textContent='⏳ בודק...';try{const r=await fetch('./index.html?_='+Date.now(),{cache:'no-store'});const txt=await r.text();const m=txt.match(/const VERSION\s*=\s*["']([^"']+)['"]/);if(!m){el.textContent='❓ לא ניתן לבדוק';return}const lv=m[1];if(cmpV(lv,VERSION)>0){el.innerHTML=`🆕 גרסה ${lv} זמינה — <a href="javascript:location.reload(true)" style="color:#748ffc">רענן לעדכון</a>`}else{el.textContent='✅ הגרסה עדכנית'}}catch{el.textContent='❌ שגיאה בבדיקה'}}
+
+loadAlerts();
+</script>
 </body>
 </html>
